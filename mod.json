@@ -1,0 +1,254 @@
+{
+	"geode": "3.4.0",
+	"gd": {
+		"win": "2.206",
+		"mac": "2.206",
+		"android": "2.206"
+	},
+	"id": "raydeeux.krazyplaylayer",
+	"name": "KrazyPlayLayer",
+	"version": "v1.0.0",
+	"developer": "RayDeeUx",
+	"description": "Edit properties a level's behavior. (Formerly part of ErysEdits.)",
+	"repository": "https://github.com/RayDeeUx/KrazyPlayLayer",
+	"settings": {
+		"enabled": {
+			"name": "Enabled",
+			"description": "Toggles the mod.",
+			"type": "bool",
+			"default": true
+		},
+		"dontFade": {
+			"name": "Force Don't Fade",
+			"description": "Choose an option for every object's \"Don't Fade\" property.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"dontEnter": {
+			"name": "Force Don't Enter",
+			"description": "Choose an option for every object's \"Don't Enter\" property.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"noGlow": {
+			"name": "Force No Glow",
+			"description": "Choose an option for every object's \"No Glow\" property.\n\n<cy>This</c> <cr>will</c> <cy>override your preferences from RayDeeUx's</c> <cl>FrickGlow</c> <cy>mod, regardless of the object.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"noAudioScale": {
+			"name": "Force No Audio Scale",
+			"description": "Choose an option for every object's \"No Audio Scale\" property.\n\n<cy>This</c> <cr>will</c> <cy>override your preferences from RayDeeUx's</c> <cl>BreakingPlatforming</c> <cy>mod, regardless of the object.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"noEffects": {
+			"name": "Force No Effects",
+			"description": "Choose an option for every object's \"No Effects\" property.\n\n<cy>Please read all the options given; there's more than two options on this one!</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable",
+				"Force Disable (+ Ignore Invis.)",
+				"Force Enable (+ Ignore Invis.)",
+				"Enable on Visible, Disable on Invis.",
+				"Disable on Visible, Enable on Invis."
+			]
+		},
+		"noObjectParticles": {
+			"name": "Hide Object Particles",
+			"description": "Hide the particle effects from <cr>MOST</c> objects inside a level.\n\n<cy>(Particle objects are obviously unaffected.)</c>\n<cy>This does not affect particle effects from picking up collectible items in levels.</c>\n<cy>Technical limitations prevent an object with \"No Particles\" enabled from showing its particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noParticlesWhenFlying": {
+			"name": "Hide Ship/UFO/Wave/Swing BG Particles",
+			"description": "Hide the particle effects that overlay your game when as a Ship, UFO, Wave, or Swing.",
+			"type": "bool",
+			"default": false
+		},
+		"noPlayerParticles": {
+			"name": "Hide All Player Particles",
+			"description": "Hide the particle effects from various player actions, including running on the floor, flying the ship, controlling your swing, and jumping as a robot.",
+			"type": "bool",
+			"default": false
+		},
+		"noSpeedParticles": {
+			"name": "Hide Speed Particles",
+			"description": "Hide the particle effects from activating speed portals.",
+			"type": "bool",
+			"default": false
+		},
+		"noGoldCoinParticles": {
+			"name": "Hide Gold Coin Particles",
+			"description": "Hide the particle effects from gold coins.\n\n<cy>This does *not* hide the particles from picking up coins.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noCoinParticles": {
+			"name": "Hide User Coin Particles",
+			"description": "Hide the particle effects from user coins.\n\n<cy>This does *not* hide the particles from picking up coins.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noEndPortalParticles": {
+			"name": "Hide End Portal Particles",
+			"description": "Hide the particle effects from end portals in Classic levels.\n\n<cy>This affects all items that emit particles and share the same position as the end portal's particle effects.</c>.",
+			"type": "bool",
+			"default": false
+		},
+		"hideEndPortalGradient": {
+			"name": "Hide End Portal Gradient",
+			"description": "Hide the gradient/glow from the end portal.",
+			"type": "bool",
+			"default": false
+		},
+		"endPortalNoSFXPlat": {
+			"name": "Force \"No SFX\" in End Trigger (Plat. Only)",
+			"description": "Override whether or not \"Level Complete\" SFX plays when using an End Level trigger <cy>in Platformer levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"endPortalInstantPlat": {
+			"name": "Force \"Instant\" in End Trigger (Plat. Only)",
+			"description": "Override whether or not the player will teleport to the end as soon as the End Level trigger's target object is on screen <cy>in Platformer levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"endPortalNoEffectsPlat": {
+			"name": "Force \"No Effects\" in End Trigger (Plat. Only)",
+			"description": "Override whether or not visual effects will play when you reach the End Level trigger <cy>in Platformer levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"endPortalNoSFXClassic": {
+			"name": "Force \"No SFX\" in End Trigger (Classic Only)",
+			"description": "Override whether or not \"Level Complete\" SFX plays when using an End Level trigger <cy>in Classic levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"endPortalInstantClassic": {
+			"name": "Force \"Instant\" in End Trigger (Classic Only)",
+			"description": "Override whether or not the player will teleport to the end as soon as the End Level trigger's target object is on screen <cy>in Classic levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"endPortalNoEffectsClassic": {
+			"name": "Force \"No Effects\" in End Trigger (Classic Only)",
+			"description": "Override whether or not visual effects will play when you reach the End Level trigger <cy>in Classic levels</c> <cr>only</c><cy>.</c>",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"disableShakeTrigger": {
+			"name": "Disable Shake Trigger",
+			"description": "Disables shake triggers without disabling the shaking effect from completing levels.",
+			"type": "bool",
+			"default": false
+		},
+		"hideTwoPlayer": {
+			"name": "Hide Two Player Guide",
+			"description": "Hide the Two Player guide when opening a two-player level.\n\n<cy>This does not *skip* the delay from showing the Two Player guide, it only hides the UI elements it adds to the screen.</c>",
+			"type": "bool",
+			"default": false
+		},
+		" ": {
+			"name": "Mute Level SFX",
+			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nDisables SFX/Edit SFX triggers.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"muteLevelOnDeath": {
+			"name": "Mute Level Audio on Death",
+			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nMutes all level audio (Music + SFX) on player death.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"muteRewardsSFX": {
+			"name": "Mute Rewards SFX on Death",
+			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nMutes all rewards SFX (orbs, diamonds, keys) when the player dies.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"hideLevelCompleteVFX": {
+			"name": "Hide Level Complete VFX",
+			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nHides the explosion, fireworks, and particles seen when completing a level.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
+			"type": "bool",
+			"default": false
+		}
+	},
+	"resources": {
+		"files": [
+			"resources/*.plist"
+		]
+	},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": ">=1.14.0",
+			"importance": "required"
+		}
+	],
+	"tags":	[
+		"cheats"
+	],
+	"issues": {
+		"url": "https://discord.com/channels/911701438269386882/1205523212444639292",
+		"info": "Ping me <cl>(@erymanthus)</c> in the Geode SDK Discord server's <cl>#help</c> channel if you need help. <cr>DMs are NOT accepted.</c>"
+	},
+	"links": {
+		"community": "https://discord.gg/WqZBYdBWZW",
+		"homepage": "https://discord.com/channels/822510988409831486/1206371881222144020"
+	}
+}
