@@ -77,9 +77,81 @@
 				"Disable on Visible, Enable on Invis."
 			]
 		},
-		"noObjectParticles": {
-			"name": "Hide Object Particles",
-			"description": "Hide the particle effects from <cr>MOST</c> objects inside a level.\n\n<cy>(Particle objects are obviously unaffected.)</c>\n<cy>This does not affect particle effects from picking up collectible items in levels.</c>\n<cy>Technical limitations prevent an object with \"No Particles\" enabled from showing its particles.</c>",
+		"noDashOrbParticles": {
+			"name": "Hide Dash Orb Particles",
+			"description": "Hide the particle effects from <cl>dash orbs</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noCustomOrbParticles": {
+			"name": "Hide Custom Orb Particles",
+			"description": "Hide the particle effects from <cl>custom orbs</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noTeleportOrbParticles": {
+			"name": "Hide Teleport Orb Particles",
+			"description": "Hide the particle effects from <cl>teleport orbs</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noJumpRingParticles": {
+			"name": "Hide Jump Ring Particles",
+			"description": "Hide the particle effects from <cl>jump rings</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noJumpPadParticles": {
+			"name": "Hide Jump Pad Particles",
+			"description": "Hide the particle effects from <cl>jump pads</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noDualPortalParticles": {
+			"name": "Hide Dual Portal Particles",
+			"description": "Hide the particle effects from <cl>dual portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noGamemodePortalParticles": {
+			"name": "Hide Gamemode Portal Particles",
+			"description": "Hide the particle effects from <cl>gamemode portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noMirrorPortalParticles": {
+			"name": "Hide Mirror Portal Particles",
+			"description": "Hide the particle effects from <cl>mirror portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noGravityPortalParticles": {
+			"name": "Hide Gravity Portal Particles",
+			"description": "Hide the particle effects from <cl>gravity portals</c> (including the <cg>green gravity portal</c>) inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noSizePortalParticles": {
+			"name": "Hide Size Portal Particles",
+			"description": "Hide the particle effects from <cl>size portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noSpeedPortalParticles": {
+			"name": "Hide Speed Portal Particles",
+			"description": "Hide the particle effects from <cl>speed portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noCollectibleParticles": {
+			"name": "Hide Collectible Particles",
+			"description": "Hide the particle effects from <cl>collectible objects</c> inside a level.\n<cy>This does *not* hide the particles from picking up such collectible items.</c>\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's particles.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"noParticles": {
+			"name": "Hide Particles (All Other Objects)",
+			"description": "Hide the particle effects from <cl>all remaining objects</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
 			"type": "bool",
 			"default": false
 		},
