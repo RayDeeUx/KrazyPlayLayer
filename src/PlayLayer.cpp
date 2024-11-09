@@ -31,54 +31,56 @@ class $modify(MyPlayLayer, PlayLayer) {
 				object->m_particleString = "";
 			} else {
 				switch (object->m_objectType) {
-					case GameObjectType::YellowJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
-					case GameObjectType::RedJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
-					case GameObjectType::PinkJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
-					case GameObjectType::GravityRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
-					case GameObjectType::DropRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
-					case GameObjectType::GreenRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::YellowJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::RedJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::PinkJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::GravityRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::DropRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::GreenRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::SpiderOrb: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::DashRing: if (Utils::getBool("noDashOrbParticles")) object->m_particleString = "";
-					case GameObjectType::GravityDashRing: if (Utils::getBool("noDashOrbParticles")) object->m_particleString = "";
+					case GameObjectType::DashRing: if (Utils::getBool("noDashOrbParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::GravityDashRing: if (Utils::getBool("noDashOrbParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::CustomRing: if (Utils::getBool("noCustomOrbParticles")) object->m_particleString = "";
+					case GameObjectType::CustomRing: if (Utils::getBool("noCustomOrbParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::TeleportOrb: if (Utils::getBool("noTeleportOrbParticles")) object->m_particleString = "";
+					case GameObjectType::TeleportOrb: if (Utils::getBool("noTeleportOrbParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::GravityPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
-					case GameObjectType::SpiderPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
-					case GameObjectType::PinkJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
-					case GameObjectType::RedJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
-					case GameObjectType::YellowJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+					case GameObjectType::GravityPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::SpiderPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::PinkJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::RedJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::YellowJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::CubePortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::ShipPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::BallPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::UfoPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::WavePortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::RobotPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
-					case GameObjectType::SwingPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::CubePortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::ShipPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::BallPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::UfoPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::WavePortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::RobotPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::SpiderPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::SwingPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::DualPortal: if (Utils::getBool("noDualPortalParticles")) object->m_particleString = "";
-					case GameObjectType::SoloPortal: if (Utils::getBool("noDualPortalParticles")) object->m_particleString = "";
+					case GameObjectType::DualPortal: if (Utils::getBool("noDualPortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::SoloPortal: if (Utils::getBool("noDualPortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::InverseMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) object->m_particleString = "";
-					case GameObjectType::NormalMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) object->m_particleString = "";
+					case GameObjectType::InverseMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::NormalMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::GravityTogglePortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
-					case GameObjectType::InverseGravityPortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
-					case GameObjectType::NormalGravityPortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
+					case GameObjectType::GravityTogglePortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::InverseGravityPortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::NormalGravityPortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::MiniSizePortal: if (Utils::getBool("noSizePortalParticles")) object->m_particleString = "";
-					case GameObjectType::RegularSizePortal: if (Utils::getBool("noSizePortalParticles")) object->m_particleString = "";
+					case GameObjectType::MiniSizePortal: if (Utils::getBool("noSizePortalParticles")) { object->m_particleString = ""; break; }
+					case GameObjectType::RegularSizePortal: if (Utils::getBool("noSizePortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::TeleportPortal: if (Utils::getBool("noTeleportPortalParticles")) object->m_particleString = "";
+					case GameObjectType::TeleportPortal: if (Utils::getBool("noTeleportPortalParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::Collectible: if (Utils::getBool("noCollectibleParticles")) object->m_particleString = "";
+					case GameObjectType::Collectible: if (Utils::getBool("noCollectibleParticles")) { object->m_particleString = ""; break; }
 
-					case GameObjectType::Modifier: if (Utils::getBool("noSpeedPortalParticles") && std::ranges::find(m_fields->speedPortalObjects, object->m_objectID) != m_fields->speedPortalObjects.end()) object->m_particleString = "";
+					case GameObjectType::Modifier: if (Utils::getBool("noSpeedPortalParticles") && std::ranges::find(m_fields->speedPortalObjects, object->m_objectID) != m_fields->speedPortalObjects.end()) { object->m_particleString = ""; break; }
 
-					default: if (Utils::getBool("noParticles")) object->m_particleString = "";
+					default: if (Utils::getBool("noParticles")) { object->m_particleString = ""; break; }
 				}
 			}
 		}
