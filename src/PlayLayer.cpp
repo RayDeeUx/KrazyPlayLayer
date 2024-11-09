@@ -20,8 +20,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 		bool foundHitboxNodeTwoPlayerGuide = false;
 		bool foundHitboxNode = false;
 	};
-	bool isIn(auto array, int id) {
-		return std::ranges::find(array, id) != array.end();
+	bool isIn(std::vector<int> numberStorage, int id) {
+		return std::ranges::find(numberStorage, id) != numberStorage.end();
 	}
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
