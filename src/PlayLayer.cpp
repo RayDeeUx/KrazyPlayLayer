@@ -45,7 +45,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		else if (Utils::getBool("noGravityPortalParticles") && isIn(m_fields->manager->gravityPortals, object->m_objectID)) object->m_particleString = "";
 		else if (Utils::getBool("noTeleportPortalParticles") && isIn(m_fields->manager->teleportPortalObjects, object->m_objectID)) object->m_particleString = "";
 		else if (Utils::getBool("noCollectibleParticles") && isIn(m_fields->manager->collectibleObjects, object->m_objectID)) object->m_particleString = "";
-		else if (Utils::getBool("noParticles")) object->m_particleString = "";
+		else if (Utils::getBool("noParticles") && !isIn(m_fields->manager->everythingInOne, object->m_objectID)) object->m_particleString = "";
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
