@@ -30,8 +30,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 		}
 		if (isIn(m_fields->manager->particleObjects, object->m_objectID)) return PlayLayer::addObject(object);
 		// truth be told, i could've done a switch case based on enum value. however, actual objects with noTouch property would be unaffected
-		if (object->m_objectID == 142 && Utils::getBool("noGoldCoinParticles")) object->m_hasParticles = false;
-		else if (object->m_objectID == 1329 && Utils::getBool("noCoinParticles")) object->m_hasNoParticles = true;
+		if (Utils::getBool("noGoldCoinParticles") && object->m_objectID == 142) object->m_hasParticles = false;
+		else if (Utils::getBool("noCoinParticles") && object->m_objectID == 1329) object->m_hasNoParticles = true;
 		else if (Utils::getBool("noCustomOrbParticles") && object->m_objectID == 1594) object->m_particleString = "";
 		else if (Utils::getBool("noTeleportOrbParticles") && object->m_objectID == 3027) object->m_particleString = "";
 		else if (Utils::getBool("noDashOrbParticles") && (object->m_objectID == 1704 || object->m_objectID == 1751)) object->m_particleString = "";
