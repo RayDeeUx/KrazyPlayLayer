@@ -14,12 +14,13 @@ class $modify(MyPlayLayer, PlayLayer) {
 		(void) self.setHookPriority("PlayLayer::addObject", PREFERRED_HOOK_PRIO);
 	}
 	struct Fields {
-		std::vector<int> particleObjects = {1586, 1700, 2065};
 		Manager* manager = Manager::getSharedInstance();
 		bool performHideTwoPlayerGuide = false;
 		bool foundPlayerOrAudioEffectsLayer = false;
 		bool foundHitboxNodeTwoPlayerGuide = false;
 		bool foundHitboxNode = false;
+		std::array<int, 3> particleObjects = {1586, 1700, 2065};
+		std::vector<int> speedPortalObjects = {200, 201, 202, 203, 1334};
 	};
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
@@ -28,6 +29,57 @@ class $modify(MyPlayLayer, PlayLayer) {
 			else if (object->m_objectID == 1329 && Utils::getBool("noCoinParticles")) object->m_hasNoParticles = true;
 			else if (Utils::getBool("noObjectParticles") && object->m_objectID != 142 && object->m_objectID != 1329) {
 				object->m_particleString = "";
+			} else {
+				switch (object->m_objectType) {
+					case GameObjectType::YellowJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::RedJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::PinkJumpRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::GravityRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::DropRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+					case GameObjectType::GreenRing: if (Utils::getBool("noJumpRingParticles")) object->m_particleString = "";
+
+					case GameObjectType::DashRing: if (Utils::getBool("noDashOrbParticles")) object->m_particleString = "";
+					case GameObjectType::GravityDashRing: if (Utils::getBool("noDashOrbParticles")) object->m_particleString = "";
+
+					case GameObjectType::CustomRing: if (Utils::getBool("noCustomOrbParticles")) object->m_particleString = "";
+
+					case GameObjectType::TeleportOrb: if (Utils::getBool("noTeleportOrbParticles")) object->m_particleString = "";
+
+					case GameObjectType::GravityPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+					case GameObjectType::SpiderPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+					case GameObjectType::PinkJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+					case GameObjectType::RedJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+					case GameObjectType::YellowJumpPad: if (Utils::getBool("noJumpPadParticles")) object->m_particleString = "";
+
+					case GameObjectType::CubePortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::ShipPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::BallPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::UfoPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::WavePortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::RobotPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+					case GameObjectType::SwingPortal: if (Utils::getBool("noGamemodePortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::DualPortal: if (Utils::getBool("noDualPortalParticles")) object->m_particleString = "";
+					case GameObjectType::SoloPortal: if (Utils::getBool("noDualPortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::InverseMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) object->m_particleString = "";
+					case GameObjectType::NormalMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::GravityTogglePortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
+					case GameObjectType::InverseGravityPortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
+					case GameObjectType::NormalGravityPortal: if (Utils::getBool("noGravityPortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::MiniSizePortal: if (Utils::getBool("noSizePortalParticles")) object->m_particleString = "";
+					case GameObjectType::RegularSizePortal: if (Utils::getBool("noSizePortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::TeleportPortal: if (Utils::getBool("noTeleportPortalParticles")) object->m_particleString = "";
+
+					case GameObjectType::Collectible: if (Utils::getBool("noCollectibleParticles")) object->m_particleString = "";
+
+					case GameObjectType::Modifier: if (Utils::getBool("noSpeedPortalParticles") && std::ranges::find(m_fields->speedPortalObjects, object->m_objectID) != m_fields->speedPortalObjects.end()) object->m_particleString = "";
+
+					default: if (Utils::getBool("noParticles")) object->m_particleString = "";
+				}
 			}
 		}
 		if (const std::string& noGlow = Utils::getString("noGlow"); noGlow != "Ignore") {
@@ -73,7 +125,26 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 			}
 		}
-		if (m_level && m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
+		if (!m_level || !m_levelSettings) return;
+		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
+		if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
+			m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
+		}
+		if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
+			m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
+		}
+		if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
+			m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
+		}
+		if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
+			m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
+		}
+		if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
+			m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
+		}
+		if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
+			m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
+		}
 	}
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);

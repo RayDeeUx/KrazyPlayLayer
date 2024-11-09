@@ -113,6 +113,12 @@
 			"type": "bool",
 			"default": false
 		},
+		"noTeleportPortalParticles": {
+			"name": "Hide Teleport Portal Particles",
+			"description": "Hide the particle effects from <cl>teleport portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"type": "bool",
+			"default": false
+		},
 		"noGamemodePortalParticles": {
 			"name": "Hide Gamemode Portal Particles",
 			"description": "Hide the particle effects from <cl>gamemode portals</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
@@ -150,8 +156,8 @@
 			"default": false
 		},
 		"noParticles": {
-			"name": "Hide Particles (All Other Objects)",
-			"description": "Hide the particle effects from <cl>all remaining objects</c> inside a level.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
+			"name": "Hide Particles (Most Other Objects)",
+			"description": "Hide the particle effects from <cl>all objects not mentioned in prior settings</c> inside a level <cy>(besides particle objects)</c>.\n\n<cy>Technical limitations prevent mods from easily overriding an object's \"No Particles\" property to show the object's original particles.</c>",
 			"type": "bool",
 			"default": false
 		},
@@ -275,7 +281,7 @@
 			"type": "bool",
 			"default": false
 		},
-		" ": {
+		"muteLevelSFX": {
 			"name": "Mute Level SFX",
 			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nDisables SFX/Edit SFX triggers.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
 			"type": "bool",
@@ -298,6 +304,72 @@
 			"description": "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nHides the explosion, fireworks, and particles seen when completing a level.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>",
 			"type": "bool",
 			"default": false
+		},
+		"fixGravityBug": {
+			"name": "Force Legacy Ship Reverse Gravity Physics",
+			"description": "Override whether or not a level will enable legacy reverse gravity ship physics.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"fixRobotJump": {
+			"name": "Force Legacy Robot Jump Pad Physics",
+			"description": "Override whether or not a level will enable legacy robot jump pad physics.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"isFlipped": {
+			"name": "Force Start Flipped",
+			"description": "Override whether or not a level will invert the player's gravity when starting the level.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"enable22Changes": {
+			"name": "Force \"Enable 2.2 Changes\"",
+			"description": "Override a level's preferences for the \"Enable 2.2 Changes\" setting.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"dynamicLevelHeight": {
+			"name": "Force Dynamic Level Height",
+			"description": "Override a level's preferences for the \"Dynamic Level Height\" setting.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
+		},
+		"noTimePenalty": {
+			"name": "Force \"No Time Penalty\" (Platformer Only)",
+			"description": "Override whether or not a platformer level's \"No Time Penalty\" setting is active.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Force Disable",
+				"Force Enable"
+			]
 		}
 	},
 	"resources": {
