@@ -19,74 +19,32 @@ class $modify(MyPlayLayer, PlayLayer) {
 		bool foundPlayerOrAudioEffectsLayer = false;
 		bool foundHitboxNodeTwoPlayerGuide = false;
 		bool foundHitboxNode = false;
-		std::array<int, 3> particleObjects = {1586, 1700, 2065};
-		std::vector<int> speedPortalObjects = {200, 201, 202, 203, 1334};
 	};
+	bool isIn(std::vector<int> v, int id) {
+		return std::ranges::find(v, id) != v.end();
+	}
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
-		if (std::ranges::find(m_fields->particleObjects, object->m_objectID) == m_fields->particleObjects.end()) {
-			if (object->m_objectID == 142 && Utils::getBool("noGoldCoinParticles")) object->m_hasParticles = false;
-			else if (object->m_objectID == 1329 && Utils::getBool("noCoinParticles")) object->m_hasNoParticles = true;
-			else if (Utils::getBool("noObjectParticles") && object->m_objectID != 142 && object->m_objectID != 1329) {
-				object->m_particleString = "";
-			} else {
-				switch (object->m_objectType) {
-					case GameObjectType::YellowJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::RedJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::PinkJumpRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::GravityRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::DropRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::GreenRing: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::SpiderOrb: if (Utils::getBool("noJumpRingParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::DashRing: if (Utils::getBool("noDashOrbParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::GravityDashRing: if (Utils::getBool("noDashOrbParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::CustomRing: if (Utils::getBool("noCustomOrbParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::TeleportOrb: if (Utils::getBool("noTeleportOrbParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::GravityPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::SpiderPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::PinkJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::RedJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::YellowJumpPad: if (Utils::getBool("noJumpPadParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::CubePortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::ShipPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::BallPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::UfoPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::WavePortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::RobotPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::SpiderPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::SwingPortal: if (Utils::getBool("noGamemodePortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::DualPortal: if (Utils::getBool("noDualPortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::SoloPortal: if (Utils::getBool("noDualPortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::InverseMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::NormalMirrorPortal: if (Utils::getBool("noMirrorPortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::GravityTogglePortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::InverseGravityPortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::NormalGravityPortal: if (Utils::getBool("noGravityPortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::MiniSizePortal: if (Utils::getBool("noSizePortalParticles")) { object->m_particleString = ""; break; }
-					case GameObjectType::RegularSizePortal: if (Utils::getBool("noSizePortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::TeleportPortal: if (Utils::getBool("noTeleportPortalParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::Collectible: if (Utils::getBool("noCollectibleParticles")) { object->m_particleString = ""; break; }
-
-					case GameObjectType::Modifier: if (Utils::getBool("noSpeedPortalParticles") && std::ranges::find(m_fields->speedPortalObjects, object->m_objectID) != m_fields->speedPortalObjects.end()) { object->m_particleString = ""; break; }
-
-					default: if (Utils::getBool("noParticles")) { object->m_particleString = ""; break; }
-				}
-			}
-		}
 		if (const std::string& noGlow = Utils::getString("noGlow"); noGlow != "Ignore") {
 			object->m_hasNoGlow = noGlow == "Force Enable"; // this has to go here because putting it in setupHasCompleted causes objects at camera's starting position to already have glow enabled
 		}
+		if (std::ranges::find(m_fields->manager->particleObjects, object->m_objectID) != m_fields->manager->particleObjects.end()) return PlayLayer::addObject(object);
+		if (object->m_objectID == 142 && Utils::getBool("noGoldCoinParticles")) object->m_hasParticles = false;
+		else if (object->m_objectID == 1329 && Utils::getBool("noCoinParticles")) object->m_hasNoParticles = true;
+		else if (Utils::getBool("noCustomOrbParticles") && object->m_objectID == 1594) object->m_particleString = "";
+		else if (Utils::getBool("noTeleportOrbParticles") && object->m_objectID == 3027) object->m_particleString = "";
+		else if (Utils::getBool("noDashOrbParticles") && (object->m_objectID == 1704 || object->m_objectID == 1751)) object->m_particleString = "";
+		else if (Utils::getBool("noDualPortalParticles") && (object->m_objectID == 286 || object->m_objectID == 287)) object->m_particleString = "";
+		else if (Utils::getBool("noMirrorPortalParticles") && (object->m_objectID == 45 || object->m_objectID == 46)) object->m_particleString = "";
+		else if (Utils::getBool("noSizePortalParticles") && (object->m_objectID == 99 || object->m_objectID == 101)) object->m_particleString = "";
+		else if (Utils::getBool("noJumpRingParticles") && isIn(m_fields->manager->jumpRingObjects, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noJumpPadParticles") && isIn(m_fields->manager->jumpPadObjects, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noGamemodePortalParticles") && isIn(m_fields->manager->gameModePortals, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noSpeedPortalParticles") && isIn(m_fields->manager->speedPortalObjects, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noGravityPortalParticles") && isIn(m_fields->manager->gravityPortals, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noTeleportPortalParticles") && isIn(m_fields->manager->teleportPortalObjects, object->m_objectID)) object->m_particleString = "";
+		else if (Utils::getBool("noCollectibleParticles") && object->m_objectID != 142 && object->m_objectID != 1329) object->m_particleString = "";
+		else if (Utils::getBool("noParticles")) object->m_particleString = "";
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
