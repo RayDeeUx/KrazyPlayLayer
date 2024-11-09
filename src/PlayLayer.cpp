@@ -20,15 +20,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		bool foundHitboxNodeTwoPlayerGuide = false;
 		bool foundHitboxNode = false;
 	};
-	bool isIn(std::vector<int> v, int id) {
-		return std::ranges::find(v, id) != v.end();
+	bool isIn(auto array, int id) {
+		return std::ranges::find(array, id) != array.end();
 	}
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
 		if (const std::string& noGlow = Utils::getString("noGlow"); noGlow != "Ignore") {
 			object->m_hasNoGlow = noGlow == "Force Enable"; // this has to go here because putting it in setupHasCompleted causes objects at camera's starting position to already have glow enabled
 		}
-		if (std::ranges::find(m_fields->manager->particleObjects, object->m_objectID) != m_fields->manager->particleObjects.end()) return PlayLayer::addObject(object);
+		if (isIn(m_fields->manager->particleObjects, object->m_objectID)) return PlayLayer::addObject(object);
 		// truth be told, i could've done a switch case based on enum value. however, actual objects with noTouch property would be unaffected
 		if (object->m_objectID == 142 && Utils::getBool("noGoldCoinParticles")) object->m_hasParticles = false;
 		else if (object->m_objectID == 1329 && Utils::getBool("noCoinParticles")) object->m_hasNoParticles = true;
@@ -44,7 +44,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		else if (Utils::getBool("noSpeedPortalParticles") && isIn(m_fields->manager->speedPortalObjects, object->m_objectID)) object->m_particleString = "";
 		else if (Utils::getBool("noGravityPortalParticles") && isIn(m_fields->manager->gravityPortals, object->m_objectID)) object->m_particleString = "";
 		else if (Utils::getBool("noTeleportPortalParticles") && isIn(m_fields->manager->teleportPortalObjects, object->m_objectID)) object->m_particleString = "";
-		else if (Utils::getBool("noCollectibleParticles") && object->m_objectID != 142 && object->m_objectID != 1329) object->m_particleString = "";
+		else if (Utils::getBool("noCollectibleParticles") && isIn(m_fields->manager->collectibleObjects, object->m_objectID)) object->m_particleString = "";
 		else if (Utils::getBool("noParticles")) object->m_particleString = "";
 		PlayLayer::addObject(object);
 	}
