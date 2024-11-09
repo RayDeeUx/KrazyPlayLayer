@@ -48,8 +48,29 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
+		if (!Utils::modEnabled()) return PlayLayer::setupHasCompleted();
+		// all of this needs to go before the orignal function call in order for the settings to apply on Attempt 1. hooking bool init is super inconsistent
+		if (!std::string(m_level->m_levelString).empty()) {
+			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
+				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
+			}
+			if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
+				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
+			}
+			if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
+				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
+			}
+			if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
+				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
+			}
+			if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
+				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
+			}
+			if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
+				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
+			}
+		}
 		PlayLayer::setupHasCompleted();
-		if (!Utils::modEnabled()) return;
 		if (m_objects) for (const auto &object : CCArrayExt<GameObject*>(m_objects)) {
 			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
 				object->m_ignoreEnter = dontEnter == "Force Enable";
@@ -85,26 +106,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 			}
 		}
-		if (!m_level || !m_levelSettings) return;
-		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
-		if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
-			m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
-		}
-		if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
-			m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
-		}
-		if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
-			m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
-		}
-		if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
-			m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
-		}
-		if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
-			m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
-		}
-		if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
-			m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
-		}
+		if (m_level && m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
 	}
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
