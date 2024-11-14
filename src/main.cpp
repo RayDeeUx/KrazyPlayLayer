@@ -1,4 +1,4 @@
-#include <Geode/loader/SettingEvent.hpp>
+#include <Geode/loader/SettingV3.hpp>
 #include "Utils.hpp"
 
 using namespace geode::prelude;
