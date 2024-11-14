@@ -27,7 +27,7 @@ class $modify(MyPlayerObject, PlayerObject) {
 
 		const auto fmod = FMODAudioEngine::sharedEngine();
 		if (pl->m_isPlatformer) fmod->pauseAllMusic(true);
-		else fmod->stopAllMusic();
+		else fmod->stopAllMusic(true);
 
 		if (this == pl->m_player2 && pl->m_level->m_twoPlayerMode)
 			return PlayerObject::playerDestroyed(p0);
