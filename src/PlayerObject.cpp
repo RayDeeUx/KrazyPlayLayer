@@ -26,13 +26,13 @@ class $modify(MyPlayerObject, PlayerObject) {
 			return PlayerObject::playerDestroyed(p0);
 
 		const auto fmod = FMODAudioEngine::sharedEngine();
-		if (pl->m_isPlatformer) fmod->pauseAllMusic();
-		else fmod->stopAllMusic();
+		if (pl->m_isPlatformer) fmod->pauseAllMusic(true);
+		else fmod->stopAllMusic(true);
 
 		if (this == pl->m_player2 && pl->m_level->m_twoPlayerMode)
 			return PlayerObject::playerDestroyed(p0);
 
-		fmod->stopAllEffects();
+		fmod->stopAllEffects(true);
 
 		return PlayerObject::playerDestroyed(p0);
 	}

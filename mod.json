@@ -380,12 +380,12 @@
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
-			"version": ">=1.14.0",
+			"version": ">=1.16.0",
 			"importance": "required"
 		}
 	],
 	"tags":	[
-		"cheats",
+		"cheat",
 		"modtober24"
 	],
 	"issues": {
