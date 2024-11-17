@@ -49,6 +49,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 		else if (Utils::getBool("noParticles") && !isIn(m_fields->manager->everythingInOne, object->m_objectID)) object->m_particleString = "";
 		PlayLayer::addObject(object);
 	}
+	/*
+	
 	void setupHasCompleted() {
 		PlayLayer::setupHasCompleted();
 		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
@@ -67,16 +69,16 @@ class $modify(MyPlayLayer, PlayLayer) {
 				object->m_hasNoAudioScale = noAudioScale == "Force Enable";
 			}
 			if (noEffects != "Ignore") {
-				/*
-				"Force Disable": force all objects to object->m_hasNoEffects = false regardless of invis status
-				"Force Enable": force all objects to object->m_hasNoEffects = true regardless of invis status
-				"Force Disable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = false if object is visible
-				"Force Enable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = true if object is visible
-				"Enable on Visible, Disable on Invis."
-				"Disable on Visible, Enable on Invis."
+				//
+				// "Force Disable": force all objects to object->m_hasNoEffects = false regardless of invis status
+				// "Force Enable": force all objects to object->m_hasNoEffects = true regardless of invis status
+				// "Force Disable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = false if object is visible
+				// "Force Enable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = true if object is visible
+				// "Enable on Visible, Disable on Invis."
+				// "Disable on Visible, Enable on Invis."
 
-				note: this could be optimized, but i wanted it to be readable source code.
-				*/
+				// note: this could be optimized, but i wanted it to be readable source code.
+				//
 				if (noEffects == "Enable on Visible, Disable on Invis.") {
 					object->m_hasNoEffects = !object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0;
 				} else if (noEffects == "Disable on Visible, Enable on Invis.") {
@@ -119,6 +121,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 	}
+	*/
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
 		if (!Utils::modEnabled()) return;
