@@ -25,7 +25,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
-		if (const std::string& noGlow = Utils::getString("noGlow"); noGlow != "Ignore") {
+		std::string& noGlow = Utils::getString("noGlow");
+		if (noGlow != "Ignore") {
 			object->m_hasNoGlow = noGlow == "Force Enable"; // this has to go here because putting it in setupHasCompleted causes objects at camera's starting position to already have glow enabled
 		}
 		if (isIn(m_fields->manager->particleObjects, object->m_objectID)) return PlayLayer::addObject(object);
@@ -51,17 +52,21 @@ class $modify(MyPlayLayer, PlayLayer) {
 	void setupHasCompleted() {
 		PlayLayer::setupHasCompleted();
 		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
+		std::string dontEnter = Utils::getString("dontEnter");
+		std::string dontFade = Utils::getString("dontFade");
+		std::string noAudioScale = Utils::getString("noAudioScale");
+		std::string noEffects = Utils::getString("noEffects");
 		for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
-			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
+			if (dontEnter != "Ignore") {
 				object->m_ignoreEnter = dontEnter == "Force Enable";
 			}
-			if (const std::string &dontFade = Utils::getString("dontFade"); dontFade != "Ignore") {
+			if (dontFade != "Ignore") {
 				object->m_ignoreFade = dontFade == "Force Enable";
 			}
-			if (const std::string &noAudioScale = Utils::getString("noAudioScale"); noAudioScale != "Ignore") {
+			if (noAudioScale != "Ignore") {
 				object->m_hasNoAudioScale = noAudioScale == "Force Enable";
 			}
-			if (const std::string &noEffects = Utils::getString("noEffects"); noEffects != "Ignore") {
+			if (noEffects != "Ignore") {
 				/*
 				"Force Disable": force all objects to object->m_hasNoEffects = false regardless of invis status
 				"Force Enable": force all objects to object->m_hasNoEffects = true regardless of invis status
@@ -78,7 +83,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 					object->m_hasNoEffects = !(!object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0);
 				} else if (utils::string::endsWith(noEffects, " (+ Ignore Invis.)")) {
 					// if "(+ Ignore Invis.)" is found at the end, need to perform invis check
-					const bool &isInvis = object->m_isHide || object->m_isInvisible || object->getOpacity() <= 0;
+					bool isInvis = object->m_isHide || object->m_isInvisible || object->getOpacity() <= 0;
 					if (!isInvis) object->m_hasNoEffects = utils::string::startsWith(noEffects, "Force Enable ");
 				} else {
 					// brute force override
@@ -87,23 +92,29 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
-		if (!std::string(m_level->m_levelString).empty() && m_levelSettings) {
-			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
+		if (!std::string(m_level->m_levelString).empty()) {
+			std::string fixRobotJump = Utils::getString("fixRobotJump");
+			std::string isFlipped = Utils::getString("isFlipped");
+			std::string enable22Changes = Utils::getString("enable22Changes");
+			std::string dynamicLevelHeight = Utils::getString("dynamicLevelHeight");
+			std::string fixGravityBug = Utils::getString("fixGravityBug");
+			std::string noTimePenalty = Utils::getString("noTimePenalty");
+			if (fixRobotJump != "Ignore") {
 				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
 			}
-			if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
+			if (isFlipped != "Ignore") {
 				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
 			}
-			if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
+			if (enable22Changes != "Ignore") {
 				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
 			}
-			if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
+			if (dynamicLevelHeight != "Ignore") {
 				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
 			}
-			if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
+			if (fixGravityBug != "Ignore") {
 				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
 			}
-			if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
+			if (noTimePenalty != "Ignore" && m_level->isPlatformer()) {
 				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
 			}
 		}

@@ -15,14 +15,17 @@ class $modify(MyEndTriggerGameObject, EndTriggerGameObject) {
 		if (!pl) return;
 		const auto level = pl->m_level;
 		if (!level) return;
-		const std::string& settingsSuffix = level->isPlatformer() ? "Plat" : "Classic";
-		if (const std::string& endPortalNoSFX = Utils::getString(fmt::format("endPortalNoSFX{}", settingsSuffix)); endPortalNoSFX != "Ignore") {
+		std::string settingsSuffix = level->isPlatformer() ? "Plat" : "Classic";
+		std::string endPortalNoSFX = Utils::getString(fmt::format("endPortalNoSFX{}", settingsSuffix));
+		std::string endPortalInstant = Utils::getString(fmt::format("endPortalInstant{}", settingsSuffix));
+		std::string endPortalNoEffects = Utils::getString(fmt::format("endPortalNoEffects{}", settingsSuffix));
+		if (endPortalNoSFX != "Ignore") {
 			this->m_noSFX = endPortalNoSFX == "Force Enable";
 		}
-		if (const std::string& endPortalInstant = Utils::getString(fmt::format("endPortalInstant{}", settingsSuffix)); endPortalInstant != "Ignore") {
+		if (endPortalInstant != "Ignore") {
 			this->m_instant = endPortalInstant == "Force Enable";
 		}
-		if (const std::string& endPortalNoEffects = Utils::getString(fmt::format("endPortalNoEffects{}", settingsSuffix)); endPortalNoEffects != "Ignore") {
+		if (endPortalNoEffects != "Ignore") {
 			this->m_noEffects = endPortalNoEffects == "Force Enable";
 		}
 		EndTriggerGameObject::triggerObject(p0, p1, p2);

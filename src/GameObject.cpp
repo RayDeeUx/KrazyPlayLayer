@@ -14,7 +14,7 @@ class $modify(MyGameObject, GameObject) {
 	void activateObject() {
 		if (!Utils::modEnabled() || LevelEditorLayer::get()) return this->activateObject();
 		if (this->m_objectID == 1520 && Utils::getBool("disableShakeTrigger")) return;
-		const std::string& noEffects = Utils::getString("noEffects");
+		std::string noEffects = Utils::getString("noEffects");
 		if (noEffects == "Ignore") return this->activateObject();
 		if (noEffects == "Enable on Visible, Disable on Invis.") {
 			this->m_hasNoEffects = !this->m_isHide && !this->m_isInvisible && this->getOpacity() > 0;
@@ -22,7 +22,7 @@ class $modify(MyGameObject, GameObject) {
 			this->m_hasNoEffects = !(!this->m_isHide && !this->m_isInvisible && this->getOpacity() > 0);
 		} else if (utils::string::endsWith(noEffects, " (+ Ignore Invis.)")) {
 			// if "(+ Ignore Invis.)" is found at the end, need to perform invis check
-			const bool &isInvis = this->m_isHide || this->m_isInvisible || this->getOpacity() <= 0;
+			bool isInvis = this->m_isHide || this->m_isInvisible || this->getOpacity() <= 0;
 			if (!isInvis) this->m_hasNoEffects = utils::string::startsWith(noEffects, "Force Enable ");
 		} else {
 			// brute force override
