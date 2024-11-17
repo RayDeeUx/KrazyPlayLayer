@@ -119,8 +119,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
 			}
 		}
-		if (auto batch = getChildByIDRecursive("batch-layer"); Utils::getBool("noPlayerParticles")) {
-			for (const auto &node : CCArrayExt<CCNode*>(batch->getChildren())) {
+		const auto &batchLayer = getChildByIDRecursive("batch-layer");
+		if (Utils::getBool("noPlayerParticles") && batchLayer != nullptr) {
+			for (const auto &node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
 				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
 					if (m_fields->foundPlayerOrAudioEffectsLayer) {
 						m_fields->foundPlayerOrAudioEffectsLayer = false;
