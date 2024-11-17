@@ -119,7 +119,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
 			}
 		}
-		const auto &batchLayer = getChildByIDRecursive("batch-layer");
+		const auto &batchLayer = this->getChildByIDRecursive("batch-layer");
 		if (Utils::getBool("noPlayerParticles") && batchLayer != nullptr) {
 			for (const auto &node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
 				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
