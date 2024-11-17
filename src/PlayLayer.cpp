@@ -49,9 +49,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
-		if (!Utils::modEnabled()) return PlayLayer::setupHasCompleted();
 		PlayLayer::setupHasCompleted();
-		if (m_objects) for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
+		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
+		for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
 			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
 				object->m_ignoreEnter = dontEnter == "Force Enable";
 			}
@@ -86,7 +86,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 			}
 		}
-		if (m_level && m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
+		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
 		if (!std::string(m_level->m_levelString).empty() && m_levelSettings) {
 			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
 				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
