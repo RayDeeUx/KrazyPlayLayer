@@ -50,6 +50,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void setupHasCompleted() {
 		if (!Utils::modEnabled()) return PlayLayer::setupHasCompleted();
+		/*
 		// all of this needs to go before the orignal function call in order for the settings to apply on Attempt 1. hooking bool init is super inconsistent
 		if (!std::string(m_level->m_levelString).empty()) {
 			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
@@ -71,6 +72,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
 			}
 		}
+		*/
 		PlayLayer::setupHasCompleted();
 		if (m_objects) for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
 			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
