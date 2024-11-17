@@ -3,14 +3,9 @@
 
 #include "Utils.hpp"
 
-#define PREFERRED_HOOK_PRIO (1999)
-
 using namespace geode::prelude;
 
 class $modify(MyGameObject, GameObject) {
-	static void onModify(auto& self) {
-		(void) self.setHookPriority("GameObject::activateObject", PREFERRED_HOOK_PRIO);
-	}
 	void activateObject() {
 		if (!Utils::modEnabled() || LevelEditorLayer::get()) return this->activateObject();
 		if (this->m_objectID == 1520 && Utils::getBool("disableShakeTrigger")) return;
