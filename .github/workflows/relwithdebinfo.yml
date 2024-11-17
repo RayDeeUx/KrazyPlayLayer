@@ -32,11 +32,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build the mod
+      - name: Build the mod (RelWithDebInfo)
         uses: geode-sdk/build-geode-mod@main
         with:
-          # build-config: RelWithDebInfo # [vscode] comment this out (and the line below!) to Release mode
-          # export-pdb: true # [vscode] comment this out (and the line above!) to Release mode
+          build-config: RelWithDebInfo # [vscode] comment this out (and the line below!) to Release mode
+          export-pdb: true # [vscode] comment this out (and the line above!) to Release mode
           # bindings: RayDeeUx/bindings
           # bindings-ref: i-hate-cc-lightning-0x490510
           # sdk: nightly
