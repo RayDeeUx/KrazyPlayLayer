@@ -12,10 +12,10 @@ class $modify(MyGameObject, GameObject) {
 		(void) self.setHookPriority("GameObject::activateObject", PREFERRED_HOOK_PRIO);
 	}
 	void activateObject() {
-		if (!Utils::modEnabled() || LevelEditorLayer::get()) return static_cast<GameObject*>(this)->activateObject();
+		if (!Utils::modEnabled() || LevelEditorLayer::get()) return this->activateObject();
 		if (this->m_objectID == 1520 && Utils::getBool("disableShakeTrigger")) return;
 		const std::string& noEffects = Utils::getString("noEffects");
-		if (noEffects == "Ignore") return static_cast<GameObject*>(this)->activateObject();
+		if (noEffects == "Ignore") return this->activateObject();
 		if (noEffects == "Enable on Visible, Disable on Invis.") {
 			this->m_hasNoEffects = !this->m_isHide && !this->m_isInvisible && this->getOpacity() > 0;
 		} else if (noEffects == "Disable on Visible, Enable on Invis.") {
@@ -28,6 +28,6 @@ class $modify(MyGameObject, GameObject) {
 			// brute force override
 			this->m_hasNoEffects = noEffects == "Force Enable";
 		}
-		static_cast<GameObject*>(this)->activateObject();
+		this->activateObject();
 	}
 };
