@@ -50,29 +50,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void setupHasCompleted() {
 		if (!Utils::modEnabled()) return PlayLayer::setupHasCompleted();
-		/*
-		// all of this needs to go before the orignal function call in order for the settings to apply on Attempt 1. hooking bool init is super inconsistent
-		if (!std::string(m_level->m_levelString).empty()) {
-			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
-				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
-			}
-			if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
-				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
-			}
-			if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
-				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
-			}
-			if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
-				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
-			}
-			if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
-				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
-			}
-			if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
-				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
-			}
-		}
-		*/
 		PlayLayer::setupHasCompleted();
 		if (m_objects) for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
 			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
@@ -110,12 +87,32 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 		if (m_level && m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
+		if (!std::string(m_level->m_levelString).empty() && m_levelSettings) {
+			if (const std::string &fixRobotJump = Utils::getString("fixRobotJump"); fixRobotJump != "Ignore") {
+				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
+			}
+			if (const std::string &isFlipped = Utils::getString("isFlipped"); isFlipped != "Ignore") {
+				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
+			}
+			if (const std::string &enable22Changes = Utils::getString("enable22Changes"); enable22Changes != "Ignore") {
+				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
+			}
+			if (const std::string &dynamicLevelHeight = Utils::getString("dynamicLevelHeight"); dynamicLevelHeight != "Ignore") {
+				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
+			}
+			if (const std::string &fixGravityBug = Utils::getString("fixGravityBug"); fixGravityBug != "Ignore") {
+				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
+			}
+			if (const std::string &noTimePenalty = Utils::getString("noTimePenalty"); noTimePenalty != "Ignore" && m_level->isPlatformer()) {
+				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
+			}
+		}
 	}
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
 		if (!Utils::modEnabled()) return;
 		if (Utils::getBool("noSpeedParticles")) {
-			for (const auto node : CCArrayExt<CCNode*>(this->getChildren())) {
+			for (const auto &node : CCArrayExt<CCNode*>(this->getChildren())) {
 				if (!m_fields->foundHitboxNode) m_fields->foundHitboxNode = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNode || node->getZOrder() != 100) continue;
 				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
@@ -123,7 +120,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		}
 		const auto batchLayer = this->getChildByIDRecursive("batch-layer");
 		if (Utils::getBool("noPlayerParticles") && batchLayer != nullptr) {
-			for (const auto node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
+			for (const auto &node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
 				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
 					if (m_fields->foundPlayerOrAudioEffectsLayer) {
 						m_fields->foundPlayerOrAudioEffectsLayer = false;
@@ -154,7 +151,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			simple: refusing to call the original will cause more issues beyond intended
 			also no bindings addresses!!
 			*/
-			for (const auto node : CCArrayExt<CCNode*>(getChildren())) {
+			for (const auto &node : CCArrayExt<CCNode*>(getChildren())) {
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) m_fields->foundHitboxNodeTwoPlayerGuide = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) continue;
 				if (const auto text = typeinfo_cast<CCLabelBMFont*>(node)) {
