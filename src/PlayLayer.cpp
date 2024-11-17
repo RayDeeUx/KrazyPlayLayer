@@ -72,7 +72,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 		PlayLayer::setupHasCompleted();
-		if (m_objects) for (const auto &object : CCArrayExt<GameObject*>(m_objects)) {
+		if (m_objects) for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
 			if (const std::string &dontEnter = Utils::getString("dontEnter"); dontEnter != "Ignore") {
 				object->m_ignoreEnter = dontEnter == "Force Enable";
 			}
@@ -113,15 +113,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::postUpdate(dt);
 		if (!Utils::modEnabled()) return;
 		if (Utils::getBool("noSpeedParticles")) {
-			for (const auto &node : CCArrayExt<CCNode*>(getChildren())) {
+			for (const auto node : CCArrayExt<CCNode*>(this->getChildren())) {
 				if (!m_fields->foundHitboxNode) m_fields->foundHitboxNode = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNode || node->getZOrder() != 100) continue;
 				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
 			}
 		}
-		const auto &batchLayer = this->getChildByIDRecursive("batch-layer");
+		const auto batchLayer = this->getChildByIDRecursive("batch-layer");
 		if (Utils::getBool("noPlayerParticles") && batchLayer != nullptr) {
-			for (const auto &node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
+			for (const auto node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
 				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
 					if (m_fields->foundPlayerOrAudioEffectsLayer) {
 						m_fields->foundPlayerOrAudioEffectsLayer = false;
@@ -152,7 +152,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			simple: refusing to call the original will cause more issues beyond intended
 			also no bindings addresses!!
 			*/
-			for (const auto &node : CCArrayExt<CCNode*>(getChildren())) {
+			for (const auto node : CCArrayExt<CCNode*>(getChildren())) {
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) m_fields->foundHitboxNodeTwoPlayerGuide = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) continue;
 				if (const auto text = typeinfo_cast<CCLabelBMFont*>(node)) {
