@@ -16,8 +16,8 @@ class $modify(MyCCParticleSystem, CCParticleSystem) {
 	void initParticle(cocos2d::sCCParticle* p0) {
 		CCParticleSystem::initParticle(p0);
 		if (!Utils::modEnabled() || !typeinfo_cast<cocos2d::CCParticleSystemQuad*>(this)) return;
-		const auto pl = PlayLayer::get();
-		const auto parent = this->getParent();
+		auto pl = PlayLayer::get();
+		auto parent = this->getParent();
 		if (!pl || !parent) return;
 		if (Utils::getBool("hideLevelCompleteVFX") && !Utils::isEclipse()) {
 			// for relevant comments on the source code within this conditional statement, please see:

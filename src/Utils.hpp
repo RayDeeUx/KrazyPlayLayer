@@ -20,5 +20,5 @@ namespace Utils {
 
 	void setBool(const std::string_view setting, bool value);
 	bool isEclipse();
-	void showEclipseMenuAlert(const std::string& settingName);
+	void showEclipseMenuAlert(std::string settingName);
 }

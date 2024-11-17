@@ -41,7 +41,7 @@ namespace Utils {
 		return Utils::isModLoaded("eclipse.eclipse-menu");
 	}
 
-	void showEclipseMenuAlert(const std::string& settingName) {
+	void showEclipseMenuAlert(std::string settingName) {
 		if (!Utils::isEclipse()) return;
 		FLAlertLayer::create(
 			"Enable this in Eclipse Menu!",

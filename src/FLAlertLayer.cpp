@@ -10,8 +10,8 @@ class $modify(MyFLAlertLayer, FLAlertLayer) {
 		(void) self.setHookPriority("FLAlertLayer::init", PREFERRED_HOOK_PRIO);
 	}
 	bool init(FLAlertLayerProtocol* delegate, char const* title, gd::string desc, char const* btn1, char const* btn2, float width, bool scroll, float height, float textScale) {
-		const std::string& titleAsString = title;
-		const std::string& descAsString = desc;
+		std::string titleAsString = title;
+		std::string descAsString = desc;
 		if (titleAsString != "Enable this in Eclipse Menu instead!" && !utils::string::endsWith(descAsString, "--RayDeeUx") && !utils::string::contains(descAsString, "I've written this feature for Eclipse Menu as well.") && !utils::string::contains(descAsString, "enable it there instead")) {
 			return FLAlertLayer::init(delegate, title, desc, btn1, btn2, width, scroll, height, textScale);
 		}

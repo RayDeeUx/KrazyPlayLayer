@@ -25,7 +25,7 @@ class $modify(MyPlayerObject, PlayerObject) {
 		if (pl->m_isPracticeMode && !pl->m_practiceMusicSync)
 			return PlayerObject::playerDestroyed(p0);
 
-		const auto fmod = FMODAudioEngine::sharedEngine();
+		auto fmod = FMODAudioEngine::sharedEngine();
 		if (pl->m_isPlatformer) fmod->pauseAllMusic(true);
 		else fmod->stopAllMusic(true);
 

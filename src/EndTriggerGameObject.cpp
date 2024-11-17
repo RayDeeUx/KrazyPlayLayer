@@ -11,9 +11,9 @@ class $modify(MyEndTriggerGameObject, EndTriggerGameObject) {
 	}
 	void triggerObject(GJBaseGameLayer *p0, int p1, gd::vector<int> const *p2) {
 		if (!Utils::modEnabled()) return EndTriggerGameObject::triggerObject(p0, p1, p2);
-		const auto pl = PlayLayer::get();
+		auto pl = PlayLayer::get();
 		if (!pl) return;
-		const auto level = pl->m_level;
+		auto level = pl->m_level;
 		if (!level) return;
 		std::string settingsSuffix = level->isPlatformer() ? "Plat" : "Classic";
 		std::string endPortalNoSFX = Utils::getString(fmt::format("endPortalNoSFX{}", settingsSuffix));

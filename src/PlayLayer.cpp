@@ -25,7 +25,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void addObject(GameObject* object) {
 		if (!Utils::modEnabled()) return PlayLayer::addObject(object);
-		std::string& noGlow = Utils::getString("noGlow");
+		std::string noGlow = Utils::getString("noGlow");
 		if (noGlow != "Ignore") {
 			object->m_hasNoGlow = noGlow == "Force Enable"; // this has to go here because putting it in setupHasCompleted causes objects at camera's starting position to already have glow enabled
 		}
@@ -56,7 +56,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		std::string dontFade = Utils::getString("dontFade");
 		std::string noAudioScale = Utils::getString("noAudioScale");
 		std::string noEffects = Utils::getString("noEffects");
-		for (const auto object : CCArrayExt<GameObject*>(m_objects)) {
+		for (auto object : CCArrayExt<GameObject*>(m_objects)) {
 			if (dontEnter != "Ignore") {
 				object->m_ignoreEnter = dontEnter == "Force Enable";
 			}
@@ -123,15 +123,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::postUpdate(dt);
 		if (!Utils::modEnabled()) return;
 		if (Utils::getBool("noSpeedParticles")) {
-			for (const auto &node : CCArrayExt<CCNode*>(this->getChildren())) {
+			for (auto node : CCArrayExt<CCNode*>(this->getChildren())) {
 				if (!m_fields->foundHitboxNode) m_fields->foundHitboxNode = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNode || node->getZOrder() != 100) continue;
-				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
+				if (auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
 			}
 		}
-		const auto batchLayer = this->getChildByIDRecursive("batch-layer");
+		auto batchLayer = this->getChildByIDRecursive("batch-layer");
 		if (Utils::getBool("noPlayerParticles") && batchLayer != nullptr) {
-			for (const auto &node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
+			for (auto node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
 				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
 					if (m_fields->foundPlayerOrAudioEffectsLayer) {
 						m_fields->foundPlayerOrAudioEffectsLayer = false;
@@ -142,7 +142,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 				if (!m_fields->foundPlayerOrAudioEffectsLayer) m_fields->foundPlayerOrAudioEffectsLayer = (node == this->m_player1 || node == this->m_player2 || typeinfo_cast<AudioEffectsLayer*>(node));
 				if (!m_fields->foundPlayerOrAudioEffectsLayer) continue;
-				const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node);
+				auto particle = typeinfo_cast<CCParticleSystemQuad*>(node);
 				if (!particle) continue;
 				if (particle->getZOrder() == 39 || particle->getZOrder() == 61) {
 					/*
@@ -162,10 +162,10 @@ class $modify(MyPlayLayer, PlayLayer) {
 			simple: refusing to call the original will cause more issues beyond intended
 			also no bindings addresses!!
 			*/
-			for (const auto &node : CCArrayExt<CCNode*>(getChildren())) {
+			for (auto node : CCArrayExt<CCNode*>(getChildren())) {
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) m_fields->foundHitboxNodeTwoPlayerGuide = node->getID() == "hitbox-node";
 				if (!m_fields->foundHitboxNodeTwoPlayerGuide) continue;
-				if (const auto text = typeinfo_cast<CCLabelBMFont*>(node)) {
+				if (auto text = typeinfo_cast<CCLabelBMFont*>(node)) {
 					std::string labelString = std::string(text->getString());
 					if (labelString != "Player 1" && labelString != "Player 2") continue;
 					text->setVisible(false);
@@ -178,7 +178,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 					text->setString("");
 					text->setPositionX(PREFERRED_HOOK_PRIO);
 					text->setPositionY(PREFERRED_HOOK_PRIO);
-				} else if (const auto sprite = typeinfo_cast<CCSprite*>(node)) {
+				} else if (auto sprite = typeinfo_cast<CCSprite*>(node)) {
 					if (typeinfo_cast<CCLabelBMFont*>(sprite)) continue;
 					if (cocos::isSpriteFrameName(sprite, "floorLine_001.png")) sprite->setVisible(false);
 					m_fields->foundHitboxNodeTwoPlayerGuide = false;
