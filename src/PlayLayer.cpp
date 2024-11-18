@@ -50,8 +50,34 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
+		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return PlayLayer::setupHasCompleted();
+		if (!std::string(m_level->m_levelString).empty()) {
+			std::string fixRobotJump = Utils::getString("fixRobotJump");
+			std::string isFlipped = Utils::getString("isFlipped");
+			std::string enable22Changes = Utils::getString("enable22Changes");
+			std::string dynamicLevelHeight = Utils::getString("dynamicLevelHeight");
+			std::string fixGravityBug = Utils::getString("fixGravityBug");
+			std::string noTimePenalty = Utils::getString("noTimePenalty");
+			if (fixRobotJump != "Ignore") {
+				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
+			}
+			if (isFlipped != "Ignore") {
+				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
+			}
+			if (enable22Changes != "Ignore") {
+				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
+			}
+			if (dynamicLevelHeight != "Ignore") {
+				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
+			}
+			if (fixGravityBug != "Ignore") {
+				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
+			}
+			if (noTimePenalty != "Ignore" && m_level->isPlatformer()) {
+				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
+			}
+		}
 		PlayLayer::setupHasCompleted();
-		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
 		std::string dontEnter = Utils::getString("dontEnter");
 		std::string dontFade = Utils::getString("dontFade");
 		std::string noAudioScale = Utils::getString("noAudioScale");
@@ -92,32 +118,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
-		if (!std::string(m_level->m_levelString).empty()) {
-			std::string fixRobotJump = Utils::getString("fixRobotJump");
-			std::string isFlipped = Utils::getString("isFlipped");
-			std::string enable22Changes = Utils::getString("enable22Changes");
-			std::string dynamicLevelHeight = Utils::getString("dynamicLevelHeight");
-			std::string fixGravityBug = Utils::getString("fixGravityBug");
-			std::string noTimePenalty = Utils::getString("noTimePenalty");
-			if (fixRobotJump != "Ignore") {
-				m_levelSettings->m_fixRobotJump = fixRobotJump == "Force Enable";
-			}
-			if (isFlipped != "Ignore") {
-				m_levelSettings->m_isFlipped = isFlipped == "Force Enable";
-			}
-			if (enable22Changes != "Ignore") {
-				m_levelSettings->m_enable22Changes = enable22Changes == "Force Enable";
-			}
-			if (dynamicLevelHeight != "Ignore") {
-				m_levelSettings->m_dynamicLevelHeight = dynamicLevelHeight == "Force Enable";
-			}
-			if (fixGravityBug != "Ignore") {
-				m_levelSettings->m_fixGravityBug = fixGravityBug == "Force Enable";
-			}
-			if (noTimePenalty != "Ignore" && m_level->isPlatformer()) {
-				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
-			}
-		}
 	}
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
