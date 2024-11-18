@@ -13,7 +13,7 @@ class $modify(MyGameObject, GameObject) {
 		if (!Utils::modEnabled() || LevelEditorLayer::get()) return GameObject::activateObject();
 		if (this->m_objectID == 1520 && Utils::getBool("disableShakeTrigger")) return;
 		std::string noEffects = Utils::getString("noEffects");
-		if (noEffects == "Ignore") return this->activateObject();
+		if (noEffects == "Ignore") return GameObject::activateObject();
 		if (noEffects == "Enable on Visible, Disable on Invis.") {
 			this->m_hasNoEffects = !this->m_isHide && !this->m_isInvisible && GameObject::getOpacity() > 0;
 		} else if (noEffects == "Disable on Visible, Enable on Invis.") {
