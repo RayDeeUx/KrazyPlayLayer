@@ -49,7 +49,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 		else if (Utils::getBool("noParticles") && !isIn(m_fields->manager->everythingInOne, object->m_objectID)) object->m_particleString = "";
 		PlayLayer::addObject(object);
 	}
-	/*
 	void setupHasCompleted() {
 		PlayLayer::setupHasCompleted();
 		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
@@ -120,7 +119,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 			}
 		}
 	}
-	*/
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
 		if (!Utils::modEnabled()) return;
