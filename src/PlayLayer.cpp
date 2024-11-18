@@ -50,48 +50,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::addObject(object);
 	}
 	void setupHasCompleted() {
-		PlayLayer::setupHasCompleted();
-		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return;
-		std::string dontEnter = Utils::getString("dontEnter");
-		std::string dontFade = Utils::getString("dontFade");
-		std::string noAudioScale = Utils::getString("noAudioScale");
-		std::string noEffects = Utils::getString("noEffects");
-		for (auto object : CCArrayExt<GameObject*>(m_objects)) {
-			if (dontEnter != "Ignore") {
-				object->m_ignoreEnter = dontEnter == "Force Enable";
-			}
-			if (dontFade != "Ignore") {
-				object->m_ignoreFade = dontFade == "Force Enable";
-			}
-			if (noAudioScale != "Ignore") {
-				object->m_hasNoAudioScale = noAudioScale == "Force Enable";
-			}
-			if (noEffects != "Ignore") {
-				/*
-				"Force Disable": force all objects to object->m_hasNoEffects = false regardless of invis status
-				"Force Enable": force all objects to object->m_hasNoEffects = true regardless of invis status
-				"Force Disable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = false if object is visible
-				"Force Enable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = true if object is visible
-				"Enable on Visible, Disable on Invis."
-				"Disable on Visible, Enable on Invis."
-
-				note: this could be optimized, but i wanted it to be readable source code.
-				*/
-				if (noEffects == "Enable on Visible, Disable on Invis.") {
-					object->m_hasNoEffects = !object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0;
-				} else if (noEffects == "Disable on Visible, Enable on Invis.") {
-					object->m_hasNoEffects = !(!object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0);
-				} else if (utils::string::endsWith(noEffects, " (+ Ignore Invis.)")) {
-					// if "(+ Ignore Invis.)" is found at the end, need to perform invis check
-					bool isInvis = object->m_isHide || object->m_isInvisible || object->getOpacity() <= 0;
-					if (!isInvis) object->m_hasNoEffects = utils::string::startsWith(noEffects, "Force Enable ");
-				} else {
-					// brute force override
-					object->m_hasNoEffects = noEffects == "Force Enable";
-				}
-			}
-		}
-		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
+		if (!Utils::modEnabled() || !m_objects || !m_level || !m_levelSettings) return PlayLayer::setupHasCompleted();
 		if (!std::string(m_level->m_levelString).empty()) {
 			std::string fixRobotJump = Utils::getString("fixRobotJump");
 			std::string isFlipped = Utils::getString("isFlipped");
@@ -118,6 +77,47 @@ class $modify(MyPlayLayer, PlayLayer) {
 				m_levelSettings->m_noTimePenalty = noTimePenalty == "Force Enable";
 			}
 		}
+		PlayLayer::setupHasCompleted();
+		std::string dontEnter = Utils::getString("dontEnter");
+		std::string dontFade = Utils::getString("dontFade");
+		std::string noAudioScale = Utils::getString("noAudioScale");
+		std::string noEffects = Utils::getString("noEffects");
+		for (auto object : CCArrayExt<GameObject*>(m_objects)) {
+			if (dontEnter != "Ignore") {
+				object->m_ignoreEnter = dontEnter == "Force Enable";
+			}
+			if (dontFade != "Ignore") {
+				object->m_ignoreFade = dontFade == "Force Enable";
+			}
+			if (noAudioScale != "Ignore") {
+				object->m_hasNoAudioScale = noAudioScale == "Force Enable";
+			}
+			if (noEffects != "Ignore") {
+				//
+				// "Force Disable": force all objects to object->m_hasNoEffects = false regardless of invis status
+				// "Force Enable": force all objects to object->m_hasNoEffects = true regardless of invis status
+				// "Force Disable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = false if object is visible
+				// "Force Enable (+ Ignore Invis.)": force an object to object->m_hasNoEffects = true if object is visible
+				// "Enable on Visible, Disable on Invis."
+				// "Disable on Visible, Enable on Invis."
+
+				// note: this could be optimized, but i wanted it to be readable source code.
+				//
+				if (noEffects == "Enable on Visible, Disable on Invis.") {
+					object->m_hasNoEffects = !object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0;
+				} else if (noEffects == "Disable on Visible, Enable on Invis.") {
+					object->m_hasNoEffects = !(!object->m_isHide && !object->m_isInvisible && object->getOpacity() > 0);
+				} else if (utils::string::endsWith(noEffects, " (+ Ignore Invis.)")) {
+					// if "(+ Ignore Invis.)" is found at the end, need to perform invis check
+					bool isInvis = object->m_isHide || object->m_isInvisible || object->getOpacity() <= 0;
+					if (!isInvis) object->m_hasNoEffects = utils::string::startsWith(noEffects, "Force Enable ");
+				} else {
+					// brute force override
+					object->m_hasNoEffects = noEffects == "Force Enable";
+				}
+			}
+		}
+		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
 	}
 	void postUpdate(float dt) {
 		PlayLayer::postUpdate(dt);
