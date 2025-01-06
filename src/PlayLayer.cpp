@@ -2,7 +2,7 @@
 #include "Manager.hpp"
 #include "Utils.hpp"
 
-#define PREFERRED_HOOK_PRIO (-4000)
+#define PREFERRED_HOOK_PRIO (-3999)
 
 using namespace geode::prelude;
 
@@ -174,7 +174,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 					text->setContentWidth(0.0f);
 					text->setColor({0,0,0});
 					text->setOpacity(0);
-					text->setZOrder(-4000);
+					text->setZOrder(-3999);
 					text->setString("");
 					text->setPositionX(PREFERRED_HOOK_PRIO);
 					text->setPositionY(PREFERRED_HOOK_PRIO);
