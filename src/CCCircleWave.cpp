@@ -1,7 +1,7 @@
 #include <Geode/modify/CCCircleWave.hpp>
 #include "Utils.hpp"
 
-#define PREFERRED_HOOK_PRIO (-2123456789)
+#define PREFERRED_HOOK_PRIO (-4000)
 
 class $modify(MyCCCircleWave, CCCircleWave) {
 	static void onModify(auto& self) {

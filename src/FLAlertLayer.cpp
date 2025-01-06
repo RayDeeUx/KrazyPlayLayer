@@ -1,6 +1,6 @@
 #include <Geode/modify/FLAlertLayer.hpp>
 
-#define PREFERRED_HOOK_PRIO (-2123456789)
+#define PREFERRED_HOOK_PRIO (-4000)
 
 using namespace geode::prelude;
 
