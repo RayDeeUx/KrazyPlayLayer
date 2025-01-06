@@ -44,8 +44,8 @@ namespace Utils {
 	void showEclipseMenuAlert(std::string settingName) {
 		if (!Utils::isEclipse()) return;
 		FLAlertLayer::create(
-			"Enable this in Eclipse Menu!",
-			"Hey there!\n\n<cy>I've written this feature for Eclipse Menu as well.</c>\nPlease <cl>enable it there instead</c>; your changes to this setting <cl>will have no effect</c> while Eclipse Menu is loaded.\n\nThanks!\n--RayDeeUx",
+			"Hey there!",
+			"<cy>Please</c> <cl>enable this in Eclipse Menu</c><cy>; I have written this feature for Eclipse Menu too.</c> Thanks!\n--RayDeeUx",
 			"Close"
 		)->show();
 	}
