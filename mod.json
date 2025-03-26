@@ -1,5 +1,5 @@
 {
-	"geode": "4.0.1",
+	"geode": "4.2.0",
 	"gd": {
 		"win": "2.2074",
 		"mac": "2.2074",
@@ -372,20 +372,17 @@
 			]
 		}
 	},
-	"resources": {
-		"files": [
-			"resources/*.plist"
-		]
-	},
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"version": ">=1.16.0",
-			"importance": "required"
+	"dependencies": {
+		"geode.node-ids": ">=1.16.0",
+		"ninxout.options_api": {
+			"version": "1.0.0",
+			"importance": "suggested"
 		}
-	],
+	},
 	"tags":	[
 		"cheat",
+		"offline",
+		"gameplay",
 		"modtober24"
 	],
 	"issues": {
