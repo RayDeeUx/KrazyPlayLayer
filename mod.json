@@ -376,7 +376,7 @@
 		"geode.node-ids": ">=1.16.0",
 		"ninxout.options_api": {
 			"version": "1.0.0",
-			"importance": "suggested"
+			"importance": "recommended"
 		}
 	},
 	"tags":	[
