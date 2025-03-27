@@ -1,4 +1,6 @@
 # KrazyPlayLayer Changelog
+## v1.1.0
+- Added More Options API support.
 ## v1.0.3
 - Index compliance. (8000 slot hook priority system < 4 billion slot hook priority system)
   - Some features might break.
