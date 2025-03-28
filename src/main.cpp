@@ -1,4 +1,5 @@
 #include <ninxout.options_api/include/API.hpp>
+#include "Manager.hpp"
 #include "Utils.hpp"
 
 using namespace geode::prelude;
@@ -18,6 +19,8 @@ using namespace geode::prelude;
 	);
 
 $on_mod(Loaded) {
+	Manager::getSharedInstance()->load();
+
 	listenForSettingChanges<bool>("muteLevelSFX", [](bool muteLevelSFX) {
 		if (Utils::isEclipse() && muteLevelSFX) Utils::showEclipseMenuAlert("muteLevelSFX");
 	});
@@ -31,6 +34,11 @@ $on_mod(Loaded) {
 		if (Utils::isEclipse() && hideLevelCompleteVFX) Utils::showEclipseMenuAlert("hideLevelCompleteVFX");
 	});
 
+	listenForAllSettingChanges([](std::shared_ptr<SettingV3> setting){
+		Manager::load();
+	});
+
+	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Disable Shake Trigger", "disableShakeTrigger", "Disables shake triggers without disabling the shaking effect from completing levels.")
 	ADD_TOGGLE("Hide Two Player Guide", "hideTwoPlayer", "Hide the Two Player guide when opening a two-player level.\n\n<cy>This does not *skip* the delay from showing the Two Player guide, it only hides the UI elements it adds to the screen.</c>")
 	ADD_TOGGLE("Mute Level SFX", "muteLevelSFX", "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nDisables SFX/Edit SFX triggers.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>")
@@ -58,4 +66,7 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Hide User Coin Particles", "noCoinParticles", "Hide the particle effects from user coins.\n\n<cy>This does *not* hide the particles from picking up coins.</c>")
 	ADD_TOGGLE("Hide End Portal Particles", "noEndPortalParticles", "Hide the particle effects from end portals in Classic levels.\n\n<cy>This affects all items that emit particles and share the same position as the end portal's particle effects.</c>.")
 	ADD_TOGGLE("Hide End Portal Gradient", "hideEndPortalGradient", "Hide the gradient/glow from the end portal.")
+	ADD_TOGGLE("Hide Player Dash Fire", "noDashFire", "Hide the dash fire animation when using a dash orb.")
+	ADD_TOGGLE("Hide Player Dash Fire", "noRobotFire", "Hide the robot fire animation when jumping as a robot.")
+	ADD_TOGGLE("Hide Player Swing Fire", "noSwingFire", "Hide the swing fire animation when being a swing.")
 }

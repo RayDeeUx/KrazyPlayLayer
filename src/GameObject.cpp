@@ -1,4 +1,5 @@
 #include <Geode/modify/GameObject.hpp>
+#include "Manager.hpp"
 #include "Utils.hpp"
 
 #define PREFERRED_HOOK_PRIO (3999)
@@ -10,9 +11,10 @@ class $modify(MyGameObject, GameObject) {
 		(void) self.setHookPriority("GameObject::activateObject", PREFERRED_HOOK_PRIO);
 	}
 	virtual void activateObject() {
-		if (!Utils::modEnabled() || LevelEditorLayer::get()) return GameObject::activateObject();
-		if (this->m_objectID == 1520 && Utils::getBool("disableShakeTrigger")) return;
-		std::string noEffects = Utils::getString("noEffects");
+		const Manager* manager = Manager::getSharedInstance();
+		if (!manager->modEnabled || LevelEditorLayer::get()) return GameObject::activateObject();
+		if (this->m_objectID == 1520 && manager->disableShakeTrigger) return;
+		const std::string& noEffects = manager->noEffects;
 		if (noEffects == "Ignore") return GameObject::activateObject();
 		if (noEffects == "Enable on Visible, Disable on Invis.") {
 			this->m_hasNoEffects = !this->m_isHide && !this->m_isInvisible && GameObject::getOpacity() > 0;
@@ -20,7 +22,7 @@ class $modify(MyGameObject, GameObject) {
 			this->m_hasNoEffects = !(!this->m_isHide && !this->m_isInvisible && GameObject::getOpacity() > 0);
 		} else if (utils::string::endsWith(noEffects, " (+ Ignore Invis.)")) {
 			// if "(+ Ignore Invis.)" is found at the end, need to perform invis check
-			bool isInvis = this->m_isHide || this->m_isInvisible || GameObject::getOpacity() <= 0;
+			const bool isInvis = this->m_isHide || this->m_isInvisible || GameObject::getOpacity() <= 0;
 			if (!isInvis) this->m_hasNoEffects = utils::string::startsWith(noEffects, "Force Enable ");
 		} else {
 			// brute force override

@@ -21,9 +21,9 @@ namespace Utils {
 
 	bool modEnabled() { return getBool("enabled"); }
 	
-	bool isModLoaded(std::string modID) { return Loader::get()->isModLoaded(modID); }
+	bool isModLoaded(const std::string& modID) { return Loader::get()->isModLoaded(modID); }
 
-	Mod* getMod(std::string modID) { return Loader::get()->getLoadedMod(modID); }
+	Mod* getMod(const std::string& modID) { return Loader::get()->getLoadedMod(modID); }
 
 	std::string getModVersion(const Mod* mod) { return mod->getVersion().toNonVString(); }
 

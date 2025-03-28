@@ -12,8 +12,8 @@ namespace Utils {
 	ccColor4B getColorAlpha(const std::string_view setting);
 	bool modEnabled();
 	
-	bool isModLoaded(std::string modID);
-	Mod* getMod(std::string modID);
+	bool isModLoaded(const std::string& modID);
+	Mod* getMod(const std::string& modID);
 	std::string getModVersion(const Mod* mod);
 
 	int getRandInt(int min = 0, int max = 5);

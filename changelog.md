@@ -1,6 +1,8 @@
 # KrazyPlayLayer Changelog
 ## v1.1.0
-- Added More Options API support.
+- Added Options API support.
+- Added `Hide Player Spider Effects`, `Hide Player Dash Fire`, `Hide Player Dash Fire`, and `Hide Player Swing Fire`.
+- Refactored a whole bunch of stuff for performance.
 ## v1.0.3
 - Index compliance. (8000 slot hook priority system < 4 billion slot hook priority system)
   - Some features might break.

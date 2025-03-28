@@ -1,4 +1,5 @@
 #include <Geode/modify/CCLightFlash.hpp>
+#include "Manager.hpp"
 #include "Utils.hpp"
 
 #define PREFERRED_HOOK_PRIO (-3999)
@@ -13,15 +14,14 @@ class $modify(MyCCLightFlash, CCLightFlash) {
 			p11, p12, p13, p14, p15, p16, p17, p18, p19
 		);
 
-		if (!Utils::modEnabled() || !Utils::getBool("hideLevelCompleteVFX") || Utils::isEclipse()) return;
+		const Manager* manager = Manager::getSharedInstance();
+		if (!manager->modEnabled || !manager->hideLevelCompleteVFX || Utils::isEclipse()) return;
 
 		// for relevant comments on the source code below this line, please see:
 		// https://raw.githubusercontent.com/EclipseMenu/EclipseMenu/main/src/hacks/Level/HideLevelCompleteVFX.cpp
 		// reused with permission on grounds of self-authored code
 
-		PlayLayer* pl = PlayLayer::get();
-
-		if (!pl || !pl->m_levelEndAnimationStarted) return;
+		if (const PlayLayer* pl = PlayLayer::get(); !pl || !pl->m_levelEndAnimationStarted) return;
 
 		this->setVisible(false);
 	}

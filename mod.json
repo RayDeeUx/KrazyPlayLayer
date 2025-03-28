@@ -18,6 +18,12 @@
 			"type": "bool",
 			"default": true
 		},
+		"optionsAPI": {
+			"name": "Settings as Options",
+			"description": "Adds the checkmark (boolean) settings of this mod into the \"More Options\" menu.\n<cy>Requires ninXout's Options API mod.</c>\n<c_>Changing ths setting requires a full game restart.</c>",
+			"type": "bool",
+			"default": true
+		},
 		"dontFade": {
 			"name": "Force Don't Fade",
 			"description": "Choose an option for every object's \"Don't Fade\" property.",
@@ -76,6 +82,35 @@
 				"Enable on Visible, Disable on Invis.",
 				"Disable on Visible, Enable on Invis."
 			]
+		},
+		"noSpiderEffects": {
+			"name": "Hide Player Spider Effects",
+			"description": "Hide the spider teleport effect.\n\n<cy>Note that there's more than one option here!</c>",
+			"type": "string",
+			"default": "Disabled",
+			"one-of": [
+				"Disabled",
+				"Spider Mode Only",
+				"Spider Mode + Pad + Orbs"
+			]
+		},
+		"noDashFire": {
+			"name": "Hide Player Dash Fire",
+			"description": "Hide the dash fire animation when using a dash orb.",
+			"type": "bool",
+			"default": false
+		},
+		"noRobotFire": {
+			"name": "Hide Player Dash Fire",
+			"description": "Hide the robot fire animation when jumping as a robot.",
+			"type": "bool",
+			"default": false
+		},
+		"noSwingFire": {
+			"name": "Hide Player Swing Fire",
+			"description": "Hide the swing fire animation when being a swing.",
+			"type": "bool",
+			"default": false
 		},
 		"noDashOrbParticles": {
 			"name": "Hide Dash Orb Particles",
