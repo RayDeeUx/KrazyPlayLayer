@@ -101,7 +101,7 @@
 			"default": false
 		},
 		"noRobotFire": {
-			"name": "Hide Player Dash Fire",
+			"name": "Hide Robot Jump Fire",
 			"description": "Hide the robot fire animation when jumping as a robot.",
 			"type": "bool",
 			"default": false

@@ -67,6 +67,6 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Hide End Portal Particles", "noEndPortalParticles", "Hide the particle effects from end portals in Classic levels.\n\n<cy>This affects all items that emit particles and share the same position as the end portal's particle effects.</c>.")
 	ADD_TOGGLE("Hide End Portal Gradient", "hideEndPortalGradient", "Hide the gradient/glow from the end portal.")
 	ADD_TOGGLE("Hide Player Dash Fire", "noDashFire", "Hide the dash fire animation when using a dash orb.")
-	ADD_TOGGLE("Hide Player Dash Fire", "noRobotFire", "Hide the robot fire animation when jumping as a robot.")
+	ADD_TOGGLE("Hide Robot Jump Fire", "noRobotFire", "Hide the robot fire animation when jumping as a robot.")
 	ADD_TOGGLE("Hide Player Swing Fire", "noSwingFire", "Hide the swing fire animation when being a swing.")
 }
