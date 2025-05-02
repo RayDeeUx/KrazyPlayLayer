@@ -13,7 +13,7 @@ class $modify(MuteRewardsSFXFMODAEHook, FMODAudioEngine) {
 	struct Fields {
 		const std::array<std::string_view, 4> badSFX = { "achievement_01.ogg", "magicExplosion.ogg", "gold02.ogg", "secretKey.ogg" };
 	};
-	void playEffect(gd::string path, float speed, float p2, float volume) {
+	int playEffect(gd::string path, float speed, float p2, float volume) {
 		const Manager* manager = Manager::getSharedInstance();
 		if (!manager->modEnabled || !manager->muteRewardsSFX || Utils::isEclipse())
 			return FMODAudioEngine::playEffect(path, speed, p2, volume);
@@ -29,5 +29,7 @@ class $modify(MuteRewardsSFXFMODAEHook, FMODAudioEngine) {
 
 		if (std::ranges::find(m_fields->badSFX, std::string_view(path)) == m_fields->badSFX.end())
 			return FMODAudioEngine::playEffect(path, speed, p2, volume);
+
+		return 0;
 	}
 };
