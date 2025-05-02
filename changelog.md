@@ -1,4 +1,6 @@
 # KrazyPlayLayer Changelog
+## v1.1.1
+- Experimental iOS support.
 ## v1.1.0
 - Added Options API support.
 - Added `Hide Player Spider Effects`, `Hide Player Dash Fire`, `Hide Player Dash Fire`, and `Hide Player Swing Fire`.
