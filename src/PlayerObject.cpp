@@ -4,7 +4,7 @@
 
 #define PREFERRED_HOOK_PRIO (-3999)
 
-#define HIDE_FIRE(sprite)\
+#define HIDE(sprite)\
 	sprite->setVisible(false);\
 	sprite->setOpacity(0);\
 	sprite->setScale(0);\
@@ -52,24 +52,39 @@ class $modify(MyPlayerObject, PlayerObject) {
 		if (!pl) return;
 		if (this != pl->m_player1 && this != pl->m_player2) return;
 		if (CCSprite* dashFire = this->m_dashFireSprite; dashFire && manager->noDashFire && this->m_isDashing) {
-			HIDE_FIRE(dashFire)
+			HIDE(dashFire)
 			if (CCSprite* child = dashFire->getChildByType<CCSprite>(0)) {
-				HIDE_FIRE(child)
+				HIDE(child)
 			}
 		}
 		if (PlayerFireBoostSprite* robotFire = this->m_robotFire; robotFire && manager->noRobotFire) {
-			HIDE_FIRE(robotFire)
+			HIDE(robotFire)
 		}
 		if (manager->noSwingFire) {
 			if (PlayerFireBoostSprite* swingTop = this->m_swingFireTop) {
-				HIDE_FIRE(swingTop)
+				HIDE(swingTop)
 			}
 			if (PlayerFireBoostSprite* swingMiddle = this->m_swingFireMiddle) {
-				HIDE_FIRE(swingMiddle)
+				HIDE(swingMiddle)
 			}
 			if (PlayerFireBoostSprite* swingBottom = this->m_swingFireBottom) {
-				HIDE_FIRE(swingBottom)
+				HIDE(swingBottom)
 			}
+		}
+		if (manager->noPlayerParticles) {
+			/*
+				cocos2d::CCParticleSystemQuad* m_playerGroundParticles;
+				cocos2d::CCParticleSystemQuad* m_trailingParticles;
+				cocos2d::CCParticleSystemQuad* m_shipClickParticles;
+				cocos2d::CCParticleSystemQuad* m_vehicleGroundParticles;
+				cocos2d::CCParticleSystemQuad* m_ufoClickParticles;
+				cocos2d::CCParticleSystemQuad* m_robotBurstParticles;
+				cocos2d::CCParticleSystemQuad* m_dashParticles;
+				cocos2d::CCParticleSystemQuad* m_swingBurstParticles1;
+				cocos2d::CCParticleSystemQuad* m_swingBurstParticles2;
+				cocos2d::CCParticleSystemQuad* m_landParticles0;
+				cocos2d::CCParticleSystemQuad* m_landParticles1;
+			*/
 		}
 	}
 	void playSpiderDashEffect(CCPoint from, CCPoint to) {
