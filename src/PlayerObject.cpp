@@ -74,7 +74,7 @@ class $modify(MyPlayerObject, PlayerObject) {
 				HIDE(swingBottom)
 			}
 		}
-		GameManager* gm = GameManager::get();
+		const GameManager* gm = GameManager::get();
 		if (m_playerGroundParticles) {
 			if (!this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing && manager->noCubeGroundParticles) {
 				PASSIVE_HIDE(m_playerGroundParticles)
