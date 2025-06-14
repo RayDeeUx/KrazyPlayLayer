@@ -4,10 +4,10 @@
 
 #define PREFERRED_HOOK_PRIO (-3999)
 
-#define HIDE(sprite)\
-	sprite->setVisible(false);\
-	sprite->setOpacity(0);\
-	sprite->setScale(0);\
+#define HIDE(item)\
+	item->setVisible(false);\
+	item->setOpacity(0);\
+	item->setScale(0);\
 
 class $modify(MyPlayerObject, PlayerObject) {
 	static void onModify(auto& self) {
@@ -71,20 +71,49 @@ class $modify(MyPlayerObject, PlayerObject) {
 				HIDE(swingBottom)
 			}
 		}
-		if (manager->noPlayerParticles) {
+		if (m_playerGroundParticles) {
+			if (!this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing && manager->noCubeGroundParticles) {
+				HIDE(m_playerGroundParticles)
+			} else if ((this->m_isBall && manager->noBallGroundParticles) || (this->m_isRobot && manager->noRobotGroundParticles) || (this->m_isSpider && manager->noSpiderGroundParticles)) {
+				HIDE(m_playerGroundParticles)
+			}
+		}
+		if (m_trailingParticles && ((this->m_isShip && manager->noShipTrailingParticles) || (this->m_isBird && manager->noUFOTrailingParticles) || (this->m_isSwing && manager->noSwingTrailingParticles))) {
+			HIDE(m_trailingParticles)
+		}
+		if (manager->noShipClickParticles && m_shipClickParticles) {
+			HIDE(m_shipClickParticles)
+		}
+		if (manager->noUFOClickParticles && m_ufoClickParticles) {
+			HIDE(m_ufoClickParticles)
+		}
+		if (m_vehicleGroundParticles && ((this->m_isShip && manager->noShipGroundParticles) || (this->m_isBird && manager->noUFOGroundParticles) || (this->m_isSwing && manager->noSwingGroundParticles) || (this->m_isDart && manager->noWaveGroundParticles))) {
+			HIDE(m_vehicleGroundParticles)
+		}
+		if (manager->noRobotBurstParticles && m_robotBurstParticles) {
+			HIDE(m_robotBurstParticles)
+		}
+		if (manager->noDashingParticles && m_dashParticles) {
+			HIDE (m_dashParticles)
 			/*
-				cocos2d::CCParticleSystemQuad* m_playerGroundParticles;
-				cocos2d::CCParticleSystemQuad* m_trailingParticles;
-				cocos2d::CCParticleSystemQuad* m_shipClickParticles;
-				cocos2d::CCParticleSystemQuad* m_vehicleGroundParticles;
-				cocos2d::CCParticleSystemQuad* m_ufoClickParticles;
-				cocos2d::CCParticleSystemQuad* m_robotBurstParticles;
-				cocos2d::CCParticleSystemQuad* m_dashParticles;
-				cocos2d::CCParticleSystemQuad* m_swingBurstParticles1;
-				cocos2d::CCParticleSystemQuad* m_swingBurstParticles2;
-				cocos2d::CCParticleSystemQuad* m_landParticles0;
-				cocos2d::CCParticleSystemQuad* m_landParticles1;
+			cocos2d::CCParticleSystemQuad* m_playerGroundParticles;
 			*/
+		}
+		if (manager->noSwingBurstParticles) {
+			if (m_swingBurstParticles1) {
+				HIDE(m_swingBurstParticles1)
+			}
+			if (m_swingBurstParticles2) {
+				HIDE(m_swingBurstParticles2)
+			}
+		}
+		if (manager->noLandingParticles) {
+			if (m_landParticles0) {
+				HIDE(m_landParticles0)
+			}
+			if (m_landParticles1) {
+				HIDE(m_landParticles1)
+			}
 		}
 	}
 	void playSpiderDashEffect(CCPoint from, CCPoint to) {

@@ -1,10 +1,10 @@
 {
-	"geode": "4.3.1",
+	"geode": "4.4.0",
 	"gd": {
 		"win": "2.2074",
 		"mac": "2.2074",
-		"android": "2.2074",
-		"ios": "2.2074"
+		"ios": "2.2074",
+		"android": "2.2074"
 	},
 	"id": "raydeeux.krazyplaylayer",
 	"name": "KrazyPlayLayer",
@@ -203,9 +203,105 @@
 			"type": "bool",
 			"default": false
 		},
-		"noPlayerParticles": {
-			"name": "Hide All Player Particles",
-			"description": "Hide the particle effects from various player actions, including running on the floor, flying the ship, controlling your swing, and jumping as a robot.",
+		"noCubeGroundParticles": {
+			"name": "Hide Cube Ground Particles",
+			"description": "Hide the ground particle effects when being a cube.",
+			"type": "bool",
+			"default": false
+		},
+		"noBallGroundParticles": {
+			"name": "Hide Ball Ground Particles",
+			"description": "Hide the ground particle effects when being a ball.",
+			"type": "bool",
+			"default": false
+		},
+		"noRobotGroundParticles": {
+			"name": "Hide Robot Ground Particles",
+			"description": "Hide the ground particle effects when being a robot.",
+			"type": "bool",
+			"default": false
+		},
+		"noSpiderGroundParticles": {
+			"name": "Hide Spider Ground Particles",
+			"description": "Hide the ground particle effects when being a spider.",
+			"type": "bool",
+			"default": false
+		},
+		"noShipTrailingParticles": {
+			"name": "Hide Ship Trailing Particles",
+			"description": "Hide the trailing particle effects when being a ship.",
+			"type": "bool",
+			"default": false
+		},
+		"noUFOTrailingParticles": {
+			"name": "Hide UFO Trailing Particles",
+			"description": "Hide the trailing particle effects when being a UFO.",
+			"type": "bool",
+			"default": false
+		},
+		"noSwingTrailingParticles": {
+			"name": "Hide Swing Trailing Particles",
+			"description": "Hide the trailing particle effects when being a swing.",
+			"type": "bool",
+			"default": false
+		},
+		"noShipClickParticles": {
+			"name": "Hide Ship Clicking Particles",
+			"description": "Hide the particle effects from controlling the ship.",
+			"type": "bool",
+			"default": false
+		},
+		"noUFOClickParticles": {
+			"name": "Hide UFO Clicking Particles",
+			"description": "Hide the particle effects from controlling the UFO.",
+			"type": "bool",
+			"default": false
+		},
+		"noShipGroundParticles": {
+			"name": "Hide Ship Ground Particles",
+			"description": "Hide the ground particle effects when being a ship.",
+			"type": "bool",
+			"default": false
+		},
+		"noUFOGroundParticles": {
+			"name": "Hide UFO Ground Particles",
+			"description": "Hide the ground particle effects when being a UFO.",
+			"type": "bool",
+			"default": false
+		},
+		"noWaveGroundParticles": {
+			"name": "Hide Wave Ground Particles",
+			"description": "Hide the ground particle effects when being a wave.",
+			"type": "bool",
+			"default": false
+		},
+		"noSwingGroundParticles": {
+			"name": "Hide Swing Ground Particles",
+			"description": "Hide the ground particle effects when being a swing.",
+			"type": "bool",
+			"default": false
+		},
+		"noRobotBurstParticles": {
+			"name": "Hide Robot Burst Particles",
+			"description": "Hide the particle effects from controlling the robot.",
+			"type": "bool",
+			"default": false
+		},
+		"noDashingParticles": {
+			"name": "Hide Player Dashing Particles",
+			"description": "Hide the particle effects from using a dash orb.",
+			"type": "bool",
+			"default": false
+		},
+		"noSwingBurstParticles": {
+			"name": "Hide Swing Burst Particles",
+			"description": "Hide the particle effects from controlling the swing.",
+			"type": "bool",
+			"default": false
+		},
+		"noLandingParticles": {
+			"name": "Hide Player Landing Particles",
+			"description": "Hide the particle effects from landing onto solid objects.",
 			"type": "bool",
 			"default": false
 		},
@@ -412,7 +508,7 @@
 		"geode.node-ids": ">=1.16.0",
 		"ninxout.options_api": "1.0.0"
 	},
-	"README": "i'm not a huge fan of making Options API a required depdendency, but there's been this stupid bug where marking it as anything lower than a required depdendency stops the toggles from being added to the game. sorry about that--to compensate, you can toggle that option off in the mod settings.",
+	"README": "i'm not a huge fan of making Options API a required dependency, but there's been this stupid bug where marking it as anything lower than a required dependency stops the toggles from being added to the game. sorry about that--to compensate, you can toggle that option off in the mod settings.",
 	"tags": [
 		"cheat",
 		"offline",

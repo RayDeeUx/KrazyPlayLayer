@@ -122,15 +122,13 @@ class $modify(MyPlayLayer, PlayLayer) {
 		const Manager* manager = Manager::getSharedInstance();
 		if (!manager->modEnabled) return;
 		const auto fields = m_fields.self();
-		#ifdef GEODE_IS_WINDOWS
-		if (manager->noSpeedParticles) {
+		if (manager->noSpeedParticles && this->getChildren()) {
 			for (CCNode* node : CCArrayExt<CCNode*>(this->getChildren())) {
-				if (!fields->foundHitboxNode) fields->foundHitboxNode = node->getID() == "hitbox-node";
+				if (!fields->foundHitboxNode) fields->foundHitboxNode = !node->getID().empty() && node->getID() == "hitbox-node";
 				if (!fields->foundHitboxNode || node->getZOrder() != 100) continue;
-				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
+				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false); // more than one particlesystem exists
 			}
 		}
-		#endif
 		if (!fields->performHideTwoPlayerGuide) return;
 		if (Utils::getBool("hideTwoPlayer")) {
 			/*
@@ -163,16 +161,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 		}
 	}
 	void toggleGlitter(bool p0) {
-		if (Utils::getBool("noParticlesWhenFlying") && Utils::modEnabled()) return PlayLayer::toggleGlitter(false);
+		if (Utils::getBool("noParticlesWhenFlying") && Utils::modEnabled()) p0 = false;
 		return PlayLayer::toggleGlitter(p0);
 	}
-	#ifndef GEODE_IS_WINDOWS
-	void playSpeedParticle(float dt) {
-		const Manager* manager = Manager::getSharedInstance();
-		if (manager->enabled && manager->noSpeedParticles) return;
-		PlayLayer::playSpeedParticle(dt);
-	}
-	#endif
 	void onQuit() {
 		Manager* manager = Manager::getSharedInstance();
 		const auto fields = m_fields.self();
