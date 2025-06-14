@@ -7,7 +7,10 @@
 #define HIDE(item)\
 	item->setVisible(false);\
 	item->setOpacity(0);\
-	item->setScale(0);\
+	item->setScale(0);
+
+#define PASSIVE_HIDE(item) item->setVisible(false);
+#define PASSIVE_VISIBLE(item) item->setVisible(true);
 
 class $modify(MyPlayerObject, PlayerObject) {
 	static void onModify(auto& self) {
@@ -71,48 +74,48 @@ class $modify(MyPlayerObject, PlayerObject) {
 				HIDE(swingBottom)
 			}
 		}
+		GameManager* gm = GameManager::get();
 		if (m_playerGroundParticles) {
 			if (!this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing && manager->noCubeGroundParticles) {
-				HIDE(m_playerGroundParticles)
+				PASSIVE_HIDE(m_playerGroundParticles)
 			} else if ((this->m_isBall && manager->noBallGroundParticles) || (this->m_isRobot && manager->noRobotGroundParticles) || (this->m_isSpider && manager->noSpiderGroundParticles)) {
-				HIDE(m_playerGroundParticles)
-			}
+				PASSIVE_HIDE(m_playerGroundParticles)
+			} else if (!gm->m_performanceMode) PASSIVE_VISIBLE(m_playerGroundParticles)
 		}
-		if (m_trailingParticles && ((this->m_isShip && manager->noShipTrailingParticles) || (this->m_isBird && manager->noUFOTrailingParticles) || (this->m_isSwing && manager->noSwingTrailingParticles))) {
-			HIDE(m_trailingParticles)
+		if (m_trailingParticles) {
+			if ((this->m_isShip && manager->noShipTrailingParticles) || (this->m_isBird && manager->noUFOTrailingParticles) || (this->m_isSwing && manager->noSwingTrailingParticles)) {
+				PASSIVE_HIDE(m_trailingParticles)
+			} else if (!gm->m_performanceMode) PASSIVE_VISIBLE(m_trailingParticles)
 		}
 		if (manager->noShipClickParticles && m_shipClickParticles) {
-			HIDE(m_shipClickParticles)
+			PASSIVE_HIDE(m_shipClickParticles)
 		}
 		if (manager->noUFOClickParticles && m_ufoClickParticles) {
-			HIDE(m_ufoClickParticles)
+			PASSIVE_HIDE(m_ufoClickParticles)
 		}
 		if (m_vehicleGroundParticles && ((this->m_isShip && manager->noShipGroundParticles) || (this->m_isBird && manager->noUFOGroundParticles) || (this->m_isSwing && manager->noSwingGroundParticles) || (this->m_isDart && manager->noWaveGroundParticles))) {
-			HIDE(m_vehicleGroundParticles)
+			PASSIVE_HIDE(m_vehicleGroundParticles)
 		}
 		if (manager->noRobotBurstParticles && m_robotBurstParticles) {
-			HIDE(m_robotBurstParticles)
+			PASSIVE_HIDE(m_robotBurstParticles)
 		}
 		if (manager->noDashingParticles && m_dashParticles) {
-			HIDE (m_dashParticles)
-			/*
-			cocos2d::CCParticleSystemQuad* m_playerGroundParticles;
-			*/
+			PASSIVE_HIDE(m_dashParticles)
 		}
 		if (manager->noSwingBurstParticles) {
 			if (m_swingBurstParticles1) {
-				HIDE(m_swingBurstParticles1)
+				PASSIVE_HIDE(m_swingBurstParticles1)
 			}
 			if (m_swingBurstParticles2) {
-				HIDE(m_swingBurstParticles2)
+				PASSIVE_HIDE(m_swingBurstParticles2)
 			}
 		}
 		if (manager->noLandingParticles) {
 			if (m_landParticles0) {
-				HIDE(m_landParticles0)
+				PASSIVE_HIDE(m_landParticles0)
 			}
 			if (m_landParticles1) {
-				HIDE(m_landParticles1)
+				PASSIVE_HIDE(m_landParticles1)
 			}
 		}
 	}
