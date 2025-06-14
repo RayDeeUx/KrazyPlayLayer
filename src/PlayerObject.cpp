@@ -93,8 +93,10 @@ class $modify(MyPlayerObject, PlayerObject) {
 		if (manager->noUFOClickParticles && m_ufoClickParticles) {
 			PASSIVE_HIDE(m_ufoClickParticles)
 		}
-		if (m_vehicleGroundParticles && ((this->m_isShip && manager->noShipGroundParticles) || (this->m_isBird && manager->noUFOGroundParticles) || (this->m_isSwing && manager->noSwingGroundParticles) || (this->m_isDart && manager->noWaveGroundParticles))) {
-			PASSIVE_HIDE(m_vehicleGroundParticles)
+		if (m_vehicleGroundParticles) {
+			if ((this->m_isShip && manager->noShipGroundParticles) || (this->m_isBird && manager->noUFOGroundParticles) || (this->m_isSwing && manager->noSwingGroundParticles) || (this->m_isDart && manager->noWaveGroundParticles)) {
+				PASSIVE_HIDE(m_vehicleGroundParticles)
+			} else if (!gm->m_performanceMode) PASSIVE_VISIBLE(m_vehicleGroundParticles)
 		}
 		if (manager->noRobotBurstParticles && m_robotBurstParticles) {
 			PASSIVE_HIDE(m_robotBurstParticles)
