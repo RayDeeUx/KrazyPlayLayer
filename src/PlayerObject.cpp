@@ -74,6 +74,20 @@ class $modify(MyPlayerObject, PlayerObject) {
 				HIDE(swingBottom)
 			}
 		}
+		if (manager->noPlayerParticles) {
+			if (m_playerGroundParticles) PASSIVE_HIDE(m_playerGroundParticles)
+			if (m_trailingParticles) PASSIVE_HIDE(m_trailingParticles)
+			if (m_shipClickParticles) PASSIVE_HIDE(m_shipClickParticles)
+			if (m_vehicleGroundParticles) PASSIVE_HIDE(m_vehicleGroundParticles)
+			if (m_ufoClickParticles) PASSIVE_HIDE(m_ufoClickParticles)
+			if (m_robotBurstParticles) PASSIVE_HIDE(m_robotBurstParticles)
+			if (m_dashParticles) PASSIVE_HIDE(m_dashParticles)
+			if (m_swingBurstParticles1) PASSIVE_HIDE(m_swingBurstParticles1)
+			if (m_swingBurstParticles2) PASSIVE_HIDE(m_swingBurstParticles2)
+			if (m_landParticles0) PASSIVE_HIDE(m_landParticles0)
+			if (m_landParticles1) PASSIVE_HIDE(m_landParticles1)
+			return;
+		}
 		const GameManager* gm = GameManager::get();
 		if (m_playerGroundParticles) {
 			if (!this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing && manager->noCubeGroundParticles) {
@@ -87,38 +101,22 @@ class $modify(MyPlayerObject, PlayerObject) {
 				PASSIVE_HIDE(m_trailingParticles)
 			} else if (!gm->m_performanceMode) PASSIVE_VISIBLE(m_trailingParticles)
 		}
-		if (manager->noShipClickParticles && m_shipClickParticles) {
-			PASSIVE_HIDE(m_shipClickParticles)
-		}
-		if (manager->noUFOClickParticles && m_ufoClickParticles) {
-			PASSIVE_HIDE(m_ufoClickParticles)
-		}
+		if (manager->noShipClickParticles && m_shipClickParticles) PASSIVE_HIDE(m_shipClickParticles)
+		if (manager->noUFOClickParticles && m_ufoClickParticles) PASSIVE_HIDE(m_ufoClickParticles)
 		if (m_vehicleGroundParticles) {
 			if ((this->m_isShip && manager->noShipGroundParticles) || (this->m_isBird && manager->noUFOGroundParticles) || (this->m_isSwing && manager->noSwingGroundParticles) || (this->m_isDart && manager->noWaveGroundParticles)) {
 				PASSIVE_HIDE(m_vehicleGroundParticles)
 			} else if (!gm->m_performanceMode) PASSIVE_VISIBLE(m_vehicleGroundParticles)
 		}
-		if (manager->noRobotBurstParticles && m_robotBurstParticles) {
-			PASSIVE_HIDE(m_robotBurstParticles)
-		}
-		if (manager->noDashingParticles && m_dashParticles) {
-			PASSIVE_HIDE(m_dashParticles)
-		}
+		if (manager->noRobotBurstParticles && m_robotBurstParticles) PASSIVE_HIDE(m_robotBurstParticles)
+		if (manager->noDashingParticles && m_dashParticles) PASSIVE_HIDE(m_dashParticles)
 		if (manager->noSwingBurstParticles) {
-			if (m_swingBurstParticles1) {
-				PASSIVE_HIDE(m_swingBurstParticles1)
-			}
-			if (m_swingBurstParticles2) {
-				PASSIVE_HIDE(m_swingBurstParticles2)
-			}
+			if (m_swingBurstParticles1) PASSIVE_HIDE(m_swingBurstParticles1)
+			if (m_swingBurstParticles2) PASSIVE_HIDE(m_swingBurstParticles2)
 		}
 		if (manager->noLandingParticles) {
-			if (m_landParticles0) {
-				PASSIVE_HIDE(m_landParticles0)
-			}
-			if (m_landParticles1) {
-				PASSIVE_HIDE(m_landParticles1)
-			}
+			if (m_landParticles0) PASSIVE_HIDE(m_landParticles0)
+			if (m_landParticles1) PASSIVE_HIDE(m_landParticles1)
 		}
 	}
 	void playSpiderDashEffect(CCPoint from, CCPoint to) {

@@ -35,6 +35,7 @@ public:
 	bool hideLevelCompleteVFX = false;
 	bool noEndPortalParticles = false;
 
+	bool noPlayerParticles = false;
 	bool noCubeGroundParticles = false;
 	bool noBallGroundParticles = false;
 	bool noRobotGroundParticles = false;
@@ -87,6 +88,7 @@ public:
 	static void load() {
 		if (!instance) instance = new Manager();
 		instance->modEnabled = Utils::getBool("enabled");
+		instance->noPlayerParticles = Utils::getBool("noPlayerParticles");
 		instance->noCubeGroundParticles = Utils::getBool("noCubeGroundParticles");
 		instance->noBallGroundParticles = Utils::getBool("noBallGroundParticles");
 		instance->noRobotGroundParticles = Utils::getBool("noRobotGroundParticles");

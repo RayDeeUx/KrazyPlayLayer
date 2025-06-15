@@ -203,6 +203,12 @@
 			"type": "bool",
 			"default": false
 		},
+		"noPlayerParticles": {
+			"name": "Hide All Player Particles", 
+			"description": "Hide the particle effects from various player actions, including running on the floor, flying the ship, controlling your swing, and jumping as a robot.",
+			"type": "bool",
+			"default": false
+		},
 		"noCubeGroundParticles": {
 			"name": "Hide Cube Ground Particles",
 			"description": "Hide the ground particle effects when being a cube.",
