@@ -15,7 +15,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	struct Fields {
 		bool performHideTwoPlayerGuide = false;
-		bool foundPlayerOrAudioEffectsLayer = false;
 		bool foundHitboxNodeTwoPlayerGuide = false;
 		bool foundHitboxNode = false;
 	};
@@ -123,36 +122,11 @@ class $modify(MyPlayLayer, PlayLayer) {
 		const Manager* manager = Manager::getSharedInstance();
 		if (!manager->modEnabled) return;
 		const auto fields = m_fields.self();
-		if (manager->noSpeedParticles) {
+		if (manager->noSpeedParticles && this->getChildren()) {
 			for (CCNode* node : CCArrayExt<CCNode*>(this->getChildren())) {
-				if (!fields->foundHitboxNode) fields->foundHitboxNode = node->getID() == "hitbox-node";
+				if (!fields->foundHitboxNode) fields->foundHitboxNode = !node->getID().empty() && node->getID() == "hitbox-node";
 				if (!fields->foundHitboxNode || node->getZOrder() != 100) continue;
-				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false);
-			}
-		}
-		if (CCNode* batchLayer = this->getChildByIDRecursive("batch-layer"); batchLayer && manager->noPlayerParticles) {
-			for (CCNode* node : CCArrayExt<CCNode*>(batchLayer->getChildren())) {
-				if (typeinfo_cast<CCSpriteBatchNode*>(node)) {
-					if (fields->foundPlayerOrAudioEffectsLayer) {
-						fields->foundPlayerOrAudioEffectsLayer = false;
-						break;
-						// player particles are always between AudioEffectsLayer and a CCSpriteBatchNode, and some are ordered after the player. breaking early here for performance reasons
-					}
-					continue;
-				}
-				if (!fields->foundPlayerOrAudioEffectsLayer) fields->foundPlayerOrAudioEffectsLayer = (node == this->m_player1 || node == this->m_player2 || typeinfo_cast<AudioEffectsLayer*>(node));
-				if (!fields->foundPlayerOrAudioEffectsLayer) continue;
-				const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node);
-				if (!particle) continue;
-				if (particle->getZOrder() == 39 || particle->getZOrder() == 61) {
-					/*
-					rob was kind enough to set the Z layer of player particles to either 39 or 61! gg
-					"ok so why not just hook CCParticleSystem functions lmao why this" --everyone else ever
-					it is still necessary to hook postUpdate to know that it's not hiding the wrong particles
-					see the typeinfo_cast call at the start of this for loop for more info on breaking out early
-					*/
-					particle->setVisible(false);
-				}
+				if (const auto particle = typeinfo_cast<CCParticleSystemQuad*>(node)) particle->setVisible(false); // more than one particlesystem exists
 			}
 		}
 		if (!fields->performHideTwoPlayerGuide) return;
@@ -187,14 +161,13 @@ class $modify(MyPlayLayer, PlayLayer) {
 		}
 	}
 	void toggleGlitter(bool p0) {
-		if (Utils::getBool("noParticlesWhenFlying") && Utils::modEnabled()) return PlayLayer::toggleGlitter(false);
+		if (Utils::getBool("noParticlesWhenFlying") && Utils::modEnabled()) p0 = false;
 		return PlayLayer::toggleGlitter(p0);
 	}
 	void onQuit() {
 		Manager* manager = Manager::getSharedInstance();
 		const auto fields = m_fields.self();
 		fields->performHideTwoPlayerGuide = false;
-		fields->foundPlayerOrAudioEffectsLayer = false;
 		fields->foundHitboxNodeTwoPlayerGuide = false;
 		fields->foundHitboxNode = false;
 		manager->endPortalX = 0.0f;
