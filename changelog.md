@@ -1,4 +1,9 @@
 # KrazyPlayLayer Changelog
+## v1.2.0
+- Revamped player-related particle visibility options.
+  - Now each one can be fine-tuned to your liking!
+  - Inadvertently, this also saves a bit on performance compared to previous approaches.
+- Made Options API an optional dependency.
 ## v1.1.1
 - Experimental iOS support.
 ## v1.1.0
