@@ -205,7 +205,7 @@
 		},
 		"noPlayerParticles": {
 			"name": "Hide All Player Particles", 
-			"description": "Hide the particle effects from various player actions, including running on the floor, flying the ship, controlling your swing, and jumping as a robot.",
+			"description": "Hide the particle effects from various player actions, including running on the floor, flying the ship, controlling your swing, and jumping as a robot.\n\n<c_>This setting overrides all settings starting from *\"Hide Cube Ground Particles\"* to *\"Hide Player Landing Particles\"*<c_>, inclusive.</c>",
 			"type": "bool",
 			"default": false
 		},
