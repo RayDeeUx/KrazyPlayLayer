@@ -330,7 +330,7 @@
 			"default": false
 		},
 		"noEndScreenShake": {
-			"name": "Disable Endscreen Shake",
+			"name": "Disable Level Completion Shake",
 			"description": "Disable the shaking effect when completing a level.",
 			"type": "bool",
 			"default": false
