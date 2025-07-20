@@ -349,7 +349,7 @@
 		},
 		"alwaysFreezeCameraAsIfItWereFirstAttempt": {
 			"name": "Always Freeze Camera at level start",
-			"description": "Always freeze the camera position as if it were Attempt 1 of a level.",
+			"description": "Always freeze the camera position as if it were Attempt 1 of a level.\n\n- <cl>Main Levels Only</c>: Only applies this setting to vanilla/main levels.\n- <cl>Editor Levels Only</c>: Only applies this setting to your custom levels from the \"My Levels\" list.\n- <cl>Custom Levels Only</c>: Only applies this setting to published online levels.",
 			"type": "string",
 			"default": "Ignore",
 			"one-of": [
