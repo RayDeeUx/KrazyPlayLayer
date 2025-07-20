@@ -40,6 +40,7 @@ $on_mod(Loaded) {
 
 	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Disable Shake Trigger", "disableShakeTrigger", "Disables shake triggers without disabling the shaking effect from completing levels.")
+	ADD_TOGGLE("Disable Endscreen Shake", "noEndScreenShake", "Disable the shaking effect when completing a level.")
 	ADD_TOGGLE("Hide Two Player Guide", "hideTwoPlayer", "Hide the Two Player guide when opening a two-player level.\n\n<cy>This does not *skip* the delay from showing the Two Player guide, it only hides the UI elements it adds to the screen.</c>")
 	ADD_TOGGLE("Mute Level SFX", "muteLevelSFX", "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nDisables SFX/Edit SFX triggers.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>")
 	ADD_TOGGLE("Mute Level Audio on Death", "muteLevelOnDeath", "<cl>Formerly part of ErysEdits; ported by me into Eclipse Menu.</c>\n\nMutes all level audio (Music + SFX) on player death.\n\n<cy>If Eclipse Menu is loaded, you will be asked to enable the equivalent option in Eclipse Menu, and this setting will be forcefully</c> <cr>disabled</c><cy>.</c>")

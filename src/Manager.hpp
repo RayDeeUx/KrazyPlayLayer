@@ -80,6 +80,9 @@ public:
 
 	bool noSpeedParticles = false;
 
+	bool noEndScreenShake = false;
+	bool isInShowComplete = false;
+
 	static Manager* getSharedInstance() {
 		if (!instance) instance = new Manager();
 		return instance;
@@ -134,5 +137,6 @@ public:
 		instance->noEffects = Utils::getString("noEffects");
 		instance->hideLevelCompleteVFX = Utils::getBool("hideLevelCompleteVFX");
 		instance->noEndPortalParticles = Utils::getBool("noEndPortalParticles");
+		instance->noEndScreenShake = Utils::getBool("noEndScreenShake");
 	}
 };

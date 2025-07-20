@@ -164,6 +164,13 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (Utils::getBool("noParticlesWhenFlying") && Utils::modEnabled()) p0 = false;
 		return PlayLayer::toggleGlitter(p0);
 	}
+	void showCompleteEffect() {
+		Manager* manager = Manager::getSharedInstance();
+		if (!manager->noEndScreenShake || m_isPracticeMode) return PlayLayer::showCompleteEffect();
+		manager->isInShowComplete = true;
+		PlayLayer::showCompleteEffect();
+		manager->isInShowComplete = false;
+	}
 	void onQuit() {
 		Manager* manager = Manager::getSharedInstance();
 		const auto fields = m_fields.self();
@@ -172,6 +179,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		fields->foundHitboxNode = false;
 		manager->endPortalX = 0.0f;
 		manager->endPortalY = 0.0f;
+		manager->isInShowComplete = false;
 		PlayLayer::onQuit();
 	}
 	void startGame() {
