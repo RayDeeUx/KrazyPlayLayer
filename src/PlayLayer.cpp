@@ -173,6 +173,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void resetLevel() {
 		PlayLayer::resetLevel();
+		if (!Utils::modEnabled()) return;
 		Manager* manager = Manager::getSharedInstance();
 		manager->isInShowComplete = false;
 		if (!m_level) return;
