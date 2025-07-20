@@ -42,7 +42,7 @@ jobs:
           # build-config: RelWithDebInfo
           # export-pdb: true
           # export-symbols: true
-          # bindings: RayDeeUx/bindings
+          bindings: RayDeeUx/bindings
           # bindings-ref: "foobar"
           combine: true
           target: ${{ matrix.config.target }}
