@@ -16,7 +16,12 @@ class $modify(MyEffectGameObject, EffectGameObject) {
 	};
 	void triggerObject(GJBaseGameLayer* p0, int p1, gd::vector<int> const* p2) {
 		const Manager* manager = Manager::getSharedInstance();
-		if (!manager->modEnabled || Utils::isEclipse())
+		if (!manager->modEnabled)
+			return EffectGameObject::triggerObject(p0, p1, p2);
+
+		if (this->m_objectID == 1520 && manager->disableShakeTrigger) return;
+
+		if (Utils::isEclipse())
 			return EffectGameObject::triggerObject(p0, p1, p2);
 
 		// for relevant comments on the source code below this line, please see:

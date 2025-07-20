@@ -25,6 +25,19 @@
 			"type": "bool",
 			"default": true
 		},
+		"dontFreezeCameraOnFirstAttempt": {
+			"name": "Don't Freeze Camera on Attempt 1",
+			"description": "Don't freeze the camera position on Attempt 1 of a level.",
+			"type": "string",
+			"default": "Ignore",
+			"one-of": [
+				"Ignore",
+				"Main Levels Only",
+				"Editor Levels Only",
+				"Custom Levels Only",
+				"All Levels"
+			]
+		},
 		"dontFade": {
 			"name": "Force Don't Fade",
 			"description": "Choose an option for every object's \"Don't Fade\" property.",

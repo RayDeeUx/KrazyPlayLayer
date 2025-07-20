@@ -115,6 +115,27 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 			}
 		}
+		const std::string& dontFreezeCamera = Utils::getString("dontFreezeCameraOnFirstAttempt");
+		if (dontFreezeCamera != "Ignore") {
+			/*
+			"Main Levels Only",
+			"Editor Levels Only",
+			"Online Levels Only",
+			"All Levels"
+			 */
+			if (dontFreezeCamera == "All Levels") {
+				m_freezeStartCamera = false;
+			} else {
+				const GJLevelType type = m_level->m_levelType;
+				if (type == GJLevelType::Editor && dontFreezeCamera == "Editor Levels Only") {
+					m_freezeStartCamera = false;
+				} else if (type == GJLevelType::Saved && dontFreezeCamera == "Online Levels Only") {
+					m_freezeStartCamera = false;
+				} else if (type == GJLevelType::Local && dontFreezeCamera == "Main Levels Only") {
+					m_freezeStartCamera = false;
+				}
+			}
+		}
 		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
 	}
 	void postUpdate(float dt) {

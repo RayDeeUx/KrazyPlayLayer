@@ -13,7 +13,6 @@ class $modify(MyGameObject, GameObject) {
 	virtual void activateObject() {
 		const Manager* manager = Manager::getSharedInstance();
 		if (!manager->modEnabled || LevelEditorLayer::get()) return GameObject::activateObject();
-		if (this->m_objectID == 1520 && manager->disableShakeTrigger) return;
 		const std::string& noEffects = manager->noEffects;
 		if (noEffects == "Ignore") return GameObject::activateObject();
 		if (noEffects == "Enable on Visible, Disable on Invis.") {
