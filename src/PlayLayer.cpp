@@ -166,7 +166,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void showCompleteEffect() {
 		Manager* manager = Manager::getSharedInstance();
-		if (!Utils::modEnabled() || !manager->noEndScreenShake || m_isPracticeMode || !m_level || m_level->isPlatformer()) return PlayLayer::showCompleteEffect();
+		if (!Utils::modEnabled() || !manager->noEndScreenShake || m_isPracticeMode) return PlayLayer::showCompleteEffect();
 		manager->isInShowComplete = true;
 		PlayLayer::showCompleteEffect();
 		manager->isInShowComplete = false;
