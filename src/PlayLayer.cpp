@@ -115,27 +115,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 				}
 			}
 		}
-		const std::string& dontFreezeCamera = Utils::getString("dontFreezeCameraOnFirstAttempt");
-		if (dontFreezeCamera != "Ignore") {
-			/*
-			"Main Levels Only",
-			"Editor Levels Only",
-			"Online Levels Only",
-			"All Levels"
-			 */
-			if (dontFreezeCamera == "All Levels") {
-				m_freezeStartCamera = false;
-			} else {
-				const GJLevelType type = m_level->m_levelType;
-				if (type == GJLevelType::Editor && dontFreezeCamera == "Editor Levels Only") {
-					m_freezeStartCamera = false;
-				} else if (type == GJLevelType::Saved && dontFreezeCamera == "Online Levels Only") {
-					m_freezeStartCamera = false;
-				} else if (type == GJLevelType::Local && dontFreezeCamera == "Main Levels Only") {
-					m_freezeStartCamera = false;
-				}
-			}
-		}
 		if (m_level->m_twoPlayerMode && Utils::getBool("hideTwoPlayer")) m_fields->performHideTwoPlayerGuide = true;
 	}
 	void postUpdate(float dt) {
@@ -191,6 +170,26 @@ class $modify(MyPlayLayer, PlayLayer) {
 		manager->isInShowComplete = true;
 		PlayLayer::showCompleteEffect();
 		manager->isInShowComplete = false;
+	}
+	void resetLevel() {
+		PlayLayer::resetLevel();
+		Manager* manager = Manager::getSharedInstance();
+		manager->isInShowComplete = false;
+		if (!m_level) return;
+		const std::string& alwaysFreezeCamera = Utils::getString("alwaysFreezeCameraAsIfItWereFirstAttempt");
+		if (alwaysFreezeCamera == "Ignore") return;
+		if (alwaysFreezeCamera == "All Levels") {
+			m_freezeStartCamera = true;
+			return;
+		}
+		const GJLevelType type = m_level->m_levelType;
+		if (type == GJLevelType::Editor && alwaysFreezeCamera == "Editor Levels Only") {
+			m_freezeStartCamera = true;
+		} else if (type == GJLevelType::Saved && alwaysFreezeCamera == "Online Levels Only") {
+			m_freezeStartCamera = true;
+		} else if (type == GJLevelType::Local && alwaysFreezeCamera == "Main Levels Only") {
+			m_freezeStartCamera = true;
+		}
 	}
 	void onQuit() {
 		Manager* manager = Manager::getSharedInstance();
