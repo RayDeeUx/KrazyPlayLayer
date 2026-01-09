@@ -8,9 +8,11 @@ using namespace geode::prelude;
 
 class $modify(MyPlayLayer, PlayLayer) {
 	static void onModify(auto& self) {
+		(void) self.setHookPriority("PlayLayer::showCompleteEffect", PREFERRED_HOOK_PRIO);
 		(void) self.setHookPriority("PlayLayer::setupHasCompleted", PREFERRED_HOOK_PRIO);
 		(void) self.setHookPriority("PlayLayer::toggleGlitter", PREFERRED_HOOK_PRIO);
 		(void) self.setHookPriority("PlayLayer::postUpdate", PREFERRED_HOOK_PRIO);
+		(void) self.setHookPriority("PlayLayer::resetLevel", PREFERRED_HOOK_PRIO);
 		(void) self.setHookPriority("PlayLayer::addObject", PREFERRED_HOOK_PRIO);
 	}
 	struct Fields {
