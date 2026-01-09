@@ -1,4 +1,7 @@
 # KrazyPlayLayer Changelog
+## v1.2.2
+- Someone had the bright idea to make levels use a different set of logic when restarting from Practice Mode.
+  - Now we all have to suffer the consequences.
 ## v1.2.1
 - Added `Always Freeze Camera at Level Start`.
   - This forces the gameplay camera to act as if you were always on Attempt 1 of a level, as opposed to, say, Attempt 295.

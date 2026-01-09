@@ -171,6 +171,28 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::showCompleteEffect();
 		manager->isInShowComplete = false;
 	}
+	void fullReset() {
+		PlayLayer::fullReset();
+		// fuck you shstaalrgw
+		if (!Utils::modEnabled()) return;
+		Manager* manager = Manager::getSharedInstance();
+		manager->isInShowComplete = false;
+		if (!m_level) return;
+		const std::string& alwaysFreezeCamera = Utils::getString("alwaysFreezeCameraAsIfItWereFirstAttempt");
+		if (alwaysFreezeCamera == "Ignore") return;
+		if (alwaysFreezeCamera == "All Levels") {
+			m_freezeStartCamera = true;
+			return;
+		}
+		const GJLevelType type = m_level->m_levelType;
+		if (type == GJLevelType::Editor && alwaysFreezeCamera == "Editor Levels Only") {
+			m_freezeStartCamera = true;
+		} else if (type == GJLevelType::Saved && alwaysFreezeCamera == "Online Levels Only") {
+			m_freezeStartCamera = true;
+		} else if (type == GJLevelType::Local && alwaysFreezeCamera == "Main Levels Only") {
+			m_freezeStartCamera = true;
+		}
+	}
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		if (!Utils::modEnabled()) return;
