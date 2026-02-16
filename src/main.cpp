@@ -34,7 +34,7 @@ $on_mod(Loaded) {
 		if (Utils::isEclipse() && hideLevelCompleteVFX) Utils::showEclipseMenuAlert("hideLevelCompleteVFX");
 	});
 
-	listenForAllSettingChanges([](std::shared_ptr<SettingV3> setting){
+	listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3> setting){
 		Manager::load();
 	});
 
