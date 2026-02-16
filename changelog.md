@@ -1,4 +1,6 @@
 # KrazyPlayLayer Changelog
+## v1.2.3
+- Port to GD 2.2081.
 ## v1.2.2
 - Someone had the bright idea to make levels use a different set of logic when restarting from Practice Mode.
   - Now we all have to suffer the consequences.
