@@ -191,7 +191,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			m_freezeStartCamera = true;
 		} else if (type == GJLevelType::Saved && alwaysFreezeCamera == "Online Levels Only") {
 			m_freezeStartCamera = true;
-		} else if (type == GJLevelType::Local && alwaysFreezeCamera == "Main Levels Only") {
+		} else if (type == GJLevelType::Main && alwaysFreezeCamera == "Main Levels Only") {
 			m_freezeStartCamera = true;
 		}
 	}
@@ -212,7 +212,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			m_freezeStartCamera = true;
 		} else if (type == GJLevelType::Saved && alwaysFreezeCamera == "Online Levels Only") {
 			m_freezeStartCamera = true;
-		} else if (type == GJLevelType::Local && alwaysFreezeCamera == "Main Levels Only") {
+		} else if (type == GJLevelType::Main && alwaysFreezeCamera == "Main Levels Only") {
 			m_freezeStartCamera = true;
 		}
 	}
