@@ -1,4 +1,6 @@
 # KrazyPlayLayer Changelog
+## v1.2.4
+- Recompile against Geode v5.0.0-beta.4.
 ## v1.2.3
 - Port to GD 2.2081.
 ## v1.2.2

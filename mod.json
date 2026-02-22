@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.0-beta.3",
+	"geode": "5.0.0-beta.4",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
@@ -8,7 +8,7 @@
 	},
 	"id": "raydeeux.krazyplaylayer",
 	"name": "KrazyPlayLayer",
-	"version": "v1.2.3",
+	"version": "v1.2.4",
 	"developer": "RayDeeUx",
 	"description": "Edit properties a level's behavior. (Formerly part of ErysEdits.)",
 	"repository": "https://github.com/RayDeeUx/KrazyPlayLayer",
@@ -532,7 +532,7 @@
 	"dependencies": {
 		"geode.node-ids": ">=1.22.0",
 		"ninxout.options_api": {
-			"version": ">=1.0.2",
+			"version": ">=1.0.3-beta.1",
 			"required": false
 		}
 	},
